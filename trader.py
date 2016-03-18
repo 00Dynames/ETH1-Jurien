@@ -10,6 +10,19 @@ def connect():
     s.connect(("10.0.254.41", 25002))
     return s.makefile('w+', 1)
 
+
+def add(order_id, symbol, direction, price, size):
+    #direction is buying / selling
+
+    json_string = '{"type": "add", "order_id": "' + order_id + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "price": "' + price + '", "size": "'+size +'"}'
+    
+def convert(order_id, symbol, direction, price, size):
+    json_string = '{"type": "convert", "order_id": "' + order_id + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "size": "'+size +'"}'
+    
+def cancel(order_id):
+    json_string = '{"type": "cancel", "order_id": "'+ order_id + '"}'
+    
+
 def main():
     exchange = connect()
     
