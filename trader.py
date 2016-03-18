@@ -14,14 +14,18 @@ def connect():
 def add(order_id, symbol, direction, price, size):
     #direction is buying / selling
 
-    json_string = '{"type": "add", "order_id": "' + order_id + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "price": "' + price + '", "size": "'+size +'"}'
+    json_string = '{"type": "add", "order_id": "' + str(order_id) + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "price": "' + str(price) + '", "size": "'+ str(size) +'"}'
     
 def convert(order_id, symbol, direction, price, size):
-    json_string = '{"type": "convert", "order_id": "' + order_id + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "size": "'+size +'"}'
+    json_string = '{"type": "convert", "order_id": "' + str(order_id) + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "size": "'+size +'"}'
     
 def cancel(order_id):
-    json_string = '{"type": "cancel", "order_id": "'+ order_id + '"}'
+    json_string = '{"type": "cancel", "order_id": "'+ str(order_id) + '"}'
     
+    
+
+
+
 
 def main():
     exchange = connect()
