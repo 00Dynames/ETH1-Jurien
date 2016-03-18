@@ -12,7 +12,13 @@ def connect():
 
 def main():
     exchange = connect()
-    print("HELLO JURIEN", file=exchange)
+    
+
+    
+    
+    
+    print("{'type': 'hello', 'team': 'JURIEN'}", file=exchange)
+    
     hello_from_exchange = json.loads(exchange.readline())
     print("The exchange replied:", hello_from_exchange, file=sys.stderr)
 
