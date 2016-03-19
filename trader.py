@@ -265,6 +265,8 @@ def canBuy(symbol):
       return True
     elif symbol == "VALE" and my_stock[symbol] < 10:
       return True
+    elif my_stock[symbol] < 100:
+      return True
 
   return False
 
@@ -287,7 +289,7 @@ def recommendedPriceToBuy(symbol):
   price_to_buy = bestBuyPrice(symbol)
   if not book.has_key(symbol) or price_to_buy == 0:
     return -1
-  if not price_to_buy == fair_price:
+  if not price_to_buy == fair_price and price_to_buy < fair_price::
     price_to_buy += 1
   return price_to_buy   
     
