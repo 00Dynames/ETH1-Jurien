@@ -4,7 +4,7 @@ from __future__ import print_function
 import sys
 import socket
 import json
-
+import time
 #GLOBALS
 
 # The amount of money we have
@@ -194,6 +194,7 @@ def main():
 #	print("i am trying to sell")
       except:
         pass
+      time.sleep(0.1)
      
 
  
