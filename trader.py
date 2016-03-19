@@ -26,9 +26,6 @@ def add(order_id, symbol, direction, price, size):
   json_string = '{"type": "add", "order_id": "' + str(order_id) + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "price": "' + str(price) + '", "size": "'+ str(size) +'"}'
   return json_string
 
-def maxBond:
-  return book["BOND"]["BUYS"]    
-    
 def convert(order_id, symbol, direction, price, size):
   json_string = '{"type": "convert", "order_id": "' + str(order_id) + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "size": "'+size +'"}'
   return json_string
@@ -115,6 +112,25 @@ def canBuy():
     return False
   else:
     return True    
+
+# gives the lowest selling price to sell quickly
+# returns "pennied" price to sell
+def recommendedPriceToSell(symbol):
+  fair_price = fairPrice(symbol)
+  price_to_sell = bestSellPrice(symbol)
+  for i in range(0, len(book[symbol]['sell'])):
+    if price_to_sell > book[symbol]['sell'][i][0] and book[symbol]['sell'][i][0] > fair_price + 1:
+      price_to_sell = books[symbol]['sell'][i][0] - 1 
+  return price_to_sell  
+    
+# returns "pennied" price to buy
+def recommendedPriceToBuy(symbol):
+  fair_price = fairPrice(symbol)
+  price_to_buy = bestBuyPrice(symbol)
+  for i in range(0, len(book[symbol]['buy'])):
+    if price_to_buy > book[symbol]['buy'][i][0] and book[symbol]['buy'][i][0] < fair_price - 1:
+      price_to_buy = books[symbol]['buy'][i][0] + 1
+  return price_to_buy   
     
 def main():
   exchange = connect()
