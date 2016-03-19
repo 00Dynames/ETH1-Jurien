@@ -62,16 +62,12 @@ def fairPrice(symbol):
   mid = (bestSellPrice(symbol) + bestBuyPrice(symbol)) / 2  
   return mid
 
-# Whether we have enough money to risk buying stocks
-def canBuy():
-  global money
-  if money <= -40000:
-    return False
-  else:
-    return True    
-   
-def canSell():
-  return True
+def canSell(symbol):
+  if symbol == "VALBZ" and my_stock[symbol] > -10:
+    return True
+  elif my_stock[symbol] > -100:
+    return True
+  return False
 
  
 # Generates buy requests and adds it onto the orders list
@@ -206,12 +202,18 @@ def processServerResponse(json_response, exchange):
   return response_dict
 
 
-def canBuy():
-  global cash
-  if cash <= -40000:
+def canBuy(symbol):
+  global money
+  if money <= -40000:
     return False
   else:
-    return True    
+    if symbol == "BOND" and my_stock[symbol] < 100: 
+      return True   
+    elif symbol == "VALBZ" and my_stock[symbol] < 10:
+      return True
+    elif symbol == "VALE" and my_stock[symbol] < 10:
+      return True
+  return False
 
 # gives the lowest selling price to sell quickly
 # returns "pennied" price to sell
