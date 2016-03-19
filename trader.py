@@ -65,6 +65,8 @@ def fairPrice(symbol):
 def canSell(symbol):
   if symbol == "VALBZ" and my_stock[symbol] > -10:
     return True
+  elif symbol == "VALE" and my_stock[symbol] > -10:
+    return True
   elif my_stock[symbol] > -100:
     return True
   return False
