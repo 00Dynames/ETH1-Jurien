@@ -16,10 +16,11 @@ def main():
     print(json_string, file=exchange)
     hello_from_exchange = json.loads(exchange.readline())
     print(hello_from_exchange)
-    json_string = '{"type": "add", "order_id": 1, "symbol": "BOND", "dir": "BUY", "price": 999 "size": 1}'
+    json_string = '{"type": "add", "order_id": 1337, "symbol": "BOND", "dir": "BUY", "price": 999, "size": 1}'
     print(json_string, file=exchange)
     while 1:
       hello_from_exchange = json.loads(exchange.readline())
+      print("test")
       print(hello_from_exchange)
 
 if __name__ == "__main__":
