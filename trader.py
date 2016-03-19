@@ -94,8 +94,9 @@ def whatToBuy():
       order_id += 1
   
   symbol = "VALBZ"
+  size = "1"
   price = recommendedPriceToBuy(symbol)
-  for j in range(10):
+  for j in range(5):
     if canBuy() and price > 0:
       buy_request = add(order_id, symbol, "BUY", price, size)
       orders.append(buy_request)
@@ -103,7 +104,7 @@ def whatToBuy():
       
   symbol = "VALE"
   price = recommendedPriceToBuy(symbol)
-  for j in range(10):
+  for j in range(5):
     if canBuy() and price > 0: 
       buy_request = add(order_id, symbol, "BUY", price, size)
       orders.append(buy_request)
@@ -124,8 +125,9 @@ def whatToSell():
       order_id += 1
 
   symbol = "VALBZ"
+  size = "1"
   price = recommendedPriceToSell(symbol)
-  for j in range(10):
+  for j in range(5):
     if canSell() and price > 0:      
       sell_request = add(order_id, symbol, "SELL", price, size)
       orders.append(sell_request)
@@ -133,7 +135,7 @@ def whatToSell():
 
   symbol = "VALE"
   price = recommendedPriceToSell(symbol)
-  for j in range(10):
+  for j in range(5):
     if canSell() and price > 0:      
       sell_request = add(order_id, symbol, "SELL", price, size)
       orders.append(sell_request)
@@ -153,6 +155,7 @@ def processServerResponse(json_response, exchange):
   global my_stock
   global money
   global book
+  global order_id
   print(response_dict)
   if response_type == "hello":
     money = response_dict["cash"]
@@ -170,7 +173,8 @@ def processServerResponse(json_response, exchange):
     pass
   elif response_type == "error":
     print(response_dict["error"])
-
+    if response_dict["error"] == "DUPLICATE_ORDER_ID":
+      order_id += 10
   elif response_type == "book":
     # Update our local copy of the book
     book[response_dict["symbol"]] = {"buy": response_dict["buy"], "sell": response_dict["sell"]}
