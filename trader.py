@@ -33,7 +33,6 @@ def add(order_id, symbol, direction, price, size):
   json_string = '{"type": "add", "order_id": "' + str(order_id) + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "price": "' + str(price) + '", "size": "'+ str(size) +'"}'
   return json_string
 
-
     
 def convert(order_id, symbol, direction, price, size):
   json_string = '{"type": "convert", "order_id": "' + str(order_id) + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "size": "'+size +'"}'
@@ -150,11 +149,8 @@ def processServerResponse(json_response, exchange):
     print (response_dict["order_id"], response_dict["error"])
 
   elif response_type == "fill":        
-<<<<<<< HEAD
     print (response_dict)
-=======
     print(response_dict)
->>>>>>> 5492f2b1d7d23a2a0d3dc3a399b24f4cddc9bbb8
     hello()
     
     #this means that our order has been filled
@@ -204,12 +200,9 @@ def main():
       except:
         pass
       time.sleep(0.1)
-<<<<<<< HEAD
-=======
      
 
  
->>>>>>> 5492f2b1d7d23a2a0d3dc3a399b24f4cddc9bbb8
 
 if __name__ == "__main__":
   main()
