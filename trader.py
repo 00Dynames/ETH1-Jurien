@@ -6,28 +6,22 @@ import socket
 import json
 
 #GLOBALS
-
 money = 0
 bond_fair = 1000
 
 book = {}
 orders = []
-
 my_stock = {}
 
+#Helppers
 def connect():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect(("10.0.254.41", 25001))
     return s.makefile('w+', 1)
 
-def add(order_id, symbol, direction, price, size):
-  #direction is buying / selling
-
-  json_string = '{"type": "add", "order_id": "' + str(order_id) + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "price": "' + str(price) + '", "size": "'+ str(size) +'"}'
-  return json_string
-
-def maxBond:
-  return book["BOND"]["BUYS"]    
+def hello():
+  json_string = '{"type": "hello", "team": "JURIEN"}'
+  print(json_string, file=exchange)
     
 def convert(order_id, symbol, direction, price, size):
   json_string = '{"type": "convert", "order_id": "' + str(order_id) + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "size": "'+size +'"}'
@@ -36,12 +30,7 @@ def convert(order_id, symbol, direction, price, size):
 def cancel(order_id):
   json_string = '{"type": "cancel", "order_id": "'+ str(order_id) + '"}'
   return json_string
-    
-def hello():
-  json_string = '{"type": "hello", "team": "JURIEN"}'
-  print(json_string, file=exchange)
 
-# Handles server responses    
 def bestBuyPrice(symbol):
   global book
   return book[symbol]["buy"][0][0]
@@ -50,6 +39,11 @@ def bestSellPrice(symbol):
   global book
   return book[symbol]["sell"][0][0]
 
+def add(order_id, symbol, direction, price, size):   #direction is buying / selling
+  json_string = '{"type": "add", "order_id": "' + str(order_id) + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "price": "' + str(price) + '", "size": "'+ str(size) +'"}'
+  return json_string
+
+# Handles server responses/fills globals     
 def processServerResponse(json_response):
   response_dict = json.loads(json_response)
   response_type = response_dict["type"]
@@ -62,32 +56,24 @@ def processServerResponse(json_response):
     for symbol_pair in response_dict["symbols"]:
       sym = symbol_pair["symbol"]
       pos = symbol_pair["position"]      
-      
       my_stock[sym] = pos
     
-  elif response_type == "open":
-    #update list of open orders
+  elif response_type == "open":    #update list of open orders
     pass
   elif response_type == "close":
     pass
   elif response_type == "error":
     print(response_dict["error"])
-
-  elif response_type == "book":
-    # Update our local copy of the book
+  elif response_type == "book":    # Update our local copy of the book
     book[response_dict["symbol"]] = {"buy": response_dict["buy"], "sell": response_dict["sell"]}
     pass
-
   elif response_type == "trade":
     pass
-  elif response_type == "ack":
-    # Our order went through
+  elif response_type == "ack":    # Our order went through
     pass
 
-  elif response_type == "reject":
-    # Remove the order from out local list
+  elif response_type == "reject":    # Remove the order from out local list
     print (response_dict["order_id"], response_dict["error"])
-
   elif response_type == "fill":        
     print response_dict
     hello()
@@ -97,8 +83,6 @@ def processServerResponse(json_response):
     
     json_string = '{"type": "hello", "team": "JURIEN"}'
     print(json_string, file=exchange)          
-
-
     pass
   elif response_type == "out":    
     pass
