@@ -91,6 +91,7 @@ def whatToBuy():
     if canBuy(symbol) and price > 0:
       buy_request = add(int(round(time.time() * 1000)), symbol, "BUY", price, size)
       orders.append(buy_request)
+      time.sleep(0.001)
   
   symbol = "VALBZ"
   size = "1"
@@ -99,13 +100,14 @@ def whatToBuy():
     if canBuy(symbol) and price > 0:
       buy_request = add(int(round(time.time() * 1000)), symbol, "BUY", price, size)
       orders.append(buy_request)
-
+      time.sleep(0.001)
   symbol = "VALE"
   price = recommendedPriceToBuy(symbol)
   for j in range(5):
     if canBuy(symbol) and price > 0: 
       buy_request = add(int(round(time.time() * 1000)), symbol, "BUY", price, size)
       orders.append(buy_request)
+      time.sleep(0.001)
 
 
 # Generates sell requests and adds it onto the orders list
@@ -119,7 +121,7 @@ def whatToSell():
     if canSell(symbol) and price > 0:
       sell_request = add(int(round(time.time() * 1000)), symbol, "SELL", price, size)
       orders.append(sell_request)
-
+      time.sleep(0.001)
   symbol = "VALBZ"
   size = "1"
   price = recommendedPriceToSell(symbol)
@@ -127,13 +129,14 @@ def whatToSell():
     if canSell(symbol) and price > 0:      
       sell_request = add(int(round(time.time() * 1000)), symbol, "SELL", price, size)
       orders.append(sell_request)
-
+      time.sleep(0.001)
   symbol = "VALE"
   price = recommendedPriceToSell(symbol)
   for j in range(5):
     if canSell(symbol) and price > 0:      
       sell_request = add(int(round(time.time() * 1000)), symbol, "SELL", price, size)
       orders.append(sell_request)
+      time.sleep(0.001)
       
       
 # Sends all the orders to the exchange
@@ -270,8 +273,7 @@ def main():
     whatToBuy()
     whatToSell()
     makeTrades(exchange)
-
-    time.sleep(0.1)
+    time.sleep(0.2)
      
 if __name__ == "__main__":
   main()
