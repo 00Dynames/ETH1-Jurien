@@ -170,7 +170,7 @@ def main():
   hello_from_exchange = json.loads(exchange.readline())
   print(hello_from_exchange)
   print(json_string, file=exchange)
- 
+  global book
   while 1:
     # Read everything the server says  
     try:
@@ -181,14 +181,16 @@ def main():
       pass
 
     for i in range(1, 100):
-      print(bestBuyPrice("BOND"))
+      if book.has_key("BOND"):
+        print(bestBuyPrice("BOND"))
       json_string = '{"type": "add", "order_id": ' + str(i) + ', "symbol": "BOND", "dir": "BUY", "price": 999, "size": 1}'
       try:
         print(json_string, file=exchange)
 #	print("i am trying to buy")
       except:
         pass
-      print(bestSellPrice("BOND"))
+      if book.has_key("BOND"):
+        print(bestSellPrice("BOND"))
       json_string = '{"type": "add", "order_id": ' + str(i+100) + ', "symbol": "BOND", "dir": "SELL", "price": 1001, "size": 1}'
       try:
         print(json_string, file=exchange)
