@@ -55,7 +55,7 @@ def processServerResponse(json_response):
     pass
   elif response_type == "reject":
     #remove the order from out local list
-    print response_dict["order_id"], response_dict["error"]
+    print (response_dict["order_id"], response_dict["error"])
   elif response_type == "fill":        
     pass
   elif response_type == "out":    
