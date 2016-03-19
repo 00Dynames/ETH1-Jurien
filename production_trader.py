@@ -15,6 +15,10 @@ bond_fair = 1000
 book = {}
 # The buy/sell requests that are sent to the exchange
 orders = []
+
+# buy original prices
+original_prices = {}
+
 # The stocks that we own
 my_stock = {"BOND": 0, "VALBZ": 0, "VALE": 0, "GS": 0, "MS": 0, "WFC": 0, "XLF": 0}
 order_id = 1
@@ -84,7 +88,7 @@ def whatToBuy():
   global order_id
   # Max number of bonds we buy in 1 transaction is 5
   symbol = "BOND"
-  size = 1 
+  size = 5 
  # price = bestSellPrice(symbol)
   price = recommendedPriceToBuy(symbol)
   for j in range(10):
@@ -129,7 +133,7 @@ def whatToSell():
   global orders
   global order_id  
   symbol = "BOND"
-  size = 1
+  size = 5
   price = recommendedPriceToSell(symbol)
   for j in range(10):
     if canSell(symbol) and price > 0:
@@ -233,7 +237,10 @@ def processServerResponse(json_response, exchange):
     
     #this means that our order has been filled
     #so we should re-evaluate the state by saying hello
-    
+    if response_dict["dir"] == "BUY":
+      if respose_dict["price"] > original_prices[response_dict["symbol"]]:
+        original_prices[response_dict["order_id"]] = response_dict["price"]
+     
     json_string = '{"type": "hello", "team": "JURIEN"}'
     print(json_string, file=exchange)          
 
@@ -266,6 +273,8 @@ def canBuy(symbol):
 def recommendedPriceToSell(symbol):
   fair_price = fairPrice(symbol)
   price_to_sell = bestSellPrice(symbol)
+  if original_prices.has_key(symbol) and original_prices[symbol] > price_to_sell:
+    return -1
   if not book.has_key(symbol) or price_to_sell == 0:
     return -1
   if not price_to_sell == fair_price:

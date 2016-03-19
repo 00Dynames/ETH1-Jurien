@@ -88,7 +88,7 @@ def whatToBuy():
   global order_id
   # Max number of bonds we buy in 1 transaction is 5
   symbol = "BOND"
-  size = 1 
+  size = 5 
  # price = bestSellPrice(symbol)
   price = recommendedPriceToBuy(symbol)
   for j in range(10):
@@ -126,6 +126,20 @@ def whatToBuy():
       buy_request = add(int(round(time.time() * 1000)), symbol, "BUY", price, size)
       orders.append(buy_request)
       time.sleep(0.001)
+  symbol = "WFC"
+  price = recommendedPriceToBuy(symbol)
+  for j in range(4):
+    if canBuy(symbol) and price > 0: 
+      buy_request = add(int(round(time.time() * 1000)), symbol, "BUY", price, size)
+      orders.append(buy_request)
+      time.sleep(0.001)
+  symbol = "XLF"
+  price = recommendedPriceToBuy(symbol)
+  for j in range(5):
+    if canBuy(symbol) and price > 0: 
+      buy_request = add(int(round(time.time() * 1000)), symbol, "BUY", price, size)
+      orders.append(buy_request)
+      time.sleep(0.001)
 
 
 # Generates sell requests and adds it onto the orders list
@@ -133,7 +147,7 @@ def whatToSell():
   global orders
   global order_id  
   symbol = "BOND"
-  size = 1
+  size = 5
   price = recommendedPriceToSell(symbol)
   for j in range(10):
     if canSell(symbol) and price > 0:
@@ -163,6 +177,20 @@ def whatToSell():
       orders.append(sell_request)
       time.sleep(0.001)
   symbol = "MS"
+  price = recommendedPriceToSell(symbol)
+  for j in range(5):
+    if canSell(symbol) and price > 0:      
+      sell_request = add(int(round(time.time() * 1000)), symbol, "SELL", price, size)
+      orders.append(sell_request)
+      time.sleep(0.001)
+  symbol = "WFC"
+  price = recommendedPriceToSell(symbol)
+  for j in range(4):
+    if canSell(symbol) and price > 0:      
+      sell_request = add(int(round(time.time() * 1000)), symbol, "SELL", price, size)
+      orders.append(sell_request)
+      time.sleep(0.001)
+  symbol = "XLF"
   price = recommendedPriceToSell(symbol)
   for j in range(5):
     if canSell(symbol) and price > 0:      
