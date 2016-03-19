@@ -46,11 +46,15 @@ def hello():
 # The highest price someone is willing to offer for a share    
 def bestBuyPrice(symbol):
   global book
+  if not book.has_key(symbol):
+    return 0
   return book[symbol]["buy"][0][0]
 
 # The lowest someone is willing to sell out a share
 def bestSellPrice(symbol):
   global book
+  if not book.has_key(symbol):
+    return 0
   return book[symbol]["sell"][0][0]
 
 
@@ -204,8 +208,8 @@ def processServerResponse(json_response, exchange):
 
 
 def canBuy():
-  global cash
-  if cash <= -40000:
+  global money
+  if money <= -40000:
     return False
   else:
     return True    
@@ -215,18 +219,22 @@ def canBuy():
 def recommendedPriceToSell(symbol):
   fair_price = fairPrice(symbol)
   price_to_sell = bestSellPrice(symbol)
+  if not book.has_key(symbol):
+    return -1
   for i in range(0, len(book[symbol]['sell'])):
     if price_to_sell > book[symbol]['sell'][i][0] and book[symbol]['sell'][i][0] > fair_price + 1:
-      price_to_sell = books[symbol]['sell'][i][0] - 1 
+      price_to_sell = book[symbol]['sell'][i][0] - 1 
   return price_to_sell  
     
 # returns "pennied" price to buy
 def recommendedPriceToBuy(symbol):
   fair_price = fairPrice(symbol)
   price_to_buy = bestBuyPrice(symbol)
+  if not book.has_key(symbol):
+    return -1
   for i in range(0, len(book[symbol]['buy'])):
     if price_to_buy > book[symbol]['buy'][i][0] and book[symbol]['buy'][i][0] < fair_price - 1:
-      price_to_buy = books[symbol]['buy'][i][0] + 1
+      price_to_buy = book[symbol]['buy'][i][0] + 1
   return price_to_buy   
     
 def main():
