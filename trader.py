@@ -5,6 +5,7 @@ import sys
 import socket
 import json
 import time
+
 #GLOBALS
 
 # The amount of money we have
@@ -28,7 +29,6 @@ def add(order_id, symbol, direction, price, size):
 
   json_string = '{"type": "add", "order_id": "' + str(order_id) + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "price": "' + str(price) + '", "size": "'+ str(size) +'"}'
   return json_string
-
 
     
 def convert(order_id, symbol, direction, price, size):
@@ -181,6 +181,7 @@ def main():
       pass
 
     for i in range(1, 100):
+
       if book.has_key("BOND"):
         print(bestBuyPrice("BOND"))
       json_string = '{"type": "add", "order_id": ' + str(i) + ', "symbol": "BOND", "dir": "BUY", "price": 999, "size": 1}'
@@ -189,6 +190,7 @@ def main():
 #	print("i am trying to buy")
       except:
         pass
+
       if book.has_key("BOND"):
         print(bestSellPrice("BOND"))
       json_string = '{"type": "add", "order_id": ' + str(i+100) + ', "symbol": "BOND", "dir": "SELL", "price": 1001, "size": 1}'
@@ -199,8 +201,5 @@ def main():
         pass
       time.sleep(0.1)
      
-
- 
-
 if __name__ == "__main__":
   main()
