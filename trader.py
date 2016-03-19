@@ -89,26 +89,23 @@ def whatToBuy():
   price = recommendedPriceToBuy(symbol)
   for j in range(10):
     if canBuy(symbol) and price > 0:
-      buy_request = add(order_id, symbol, "BUY", price, size)
+      buy_request = add(int(round(time.time() * 1000)), symbol, "BUY", price, size)
       orders.append(buy_request)
-      order_id += 1
   
   symbol = "VALBZ"
   size = "1"
   price = recommendedPriceToBuy(symbol)
   for j in range(5):
     if canBuy(symbol) and price > 0:
-      buy_request = add(order_id, symbol, "BUY", price, size)
+      buy_request = add(int(round(time.time() * 1000)), symbol, "BUY", price, size)
       orders.append(buy_request)
-      order_id += 1
-      
+
   symbol = "VALE"
   price = recommendedPriceToBuy(symbol)
   for j in range(5):
     if canBuy(symbol) and price > 0: 
-      buy_request = add(order_id, symbol, "BUY", price, size)
+      buy_request = add(int(round(time.time() * 1000)), symbol, "BUY", price, size)
       orders.append(buy_request)
-      order_id += 1
 
 
 # Generates sell requests and adds it onto the orders list
@@ -120,26 +117,23 @@ def whatToSell():
   price = recommendedPriceToSell(symbol)
   for j in range(10):
     if canSell(symbol) and price > 0:
-      sell_request = add(order_id, symbol, "SELL", price, size)
+      sell_request = add(int(round(time.time() * 1000)), symbol, "SELL", price, size)
       orders.append(sell_request)
-      order_id += 1
 
   symbol = "VALBZ"
   size = "1"
   price = recommendedPriceToSell(symbol)
   for j in range(5):
     if canSell(symbol) and price > 0:      
-      sell_request = add(order_id, symbol, "SELL", price, size)
+      sell_request = add(int(round(time.time() * 1000)), symbol, "SELL", price, size)
       orders.append(sell_request)
-      order_id += 1
 
   symbol = "VALE"
   price = recommendedPriceToSell(symbol)
   for j in range(5):
     if canSell(symbol) and price > 0:      
-      sell_request = add(order_id, symbol, "SELL", price, size)
+      sell_request = add(int(round(time.time() * 1000)), symbol, "SELL", price, size)
       orders.append(sell_request)
-      order_id += 1
       
       
 # Sends all the orders to the exchange
