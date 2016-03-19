@@ -9,7 +9,7 @@ import json
 
 money = 0
 bond_fair = 1000
-
+book = {}
 
 def connect():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -21,7 +21,9 @@ def add(order_id, symbol, direction, price, size):
 
   json_string = '{"type": "add", "order_id": "' + str(order_id) + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "price": "' + str(price) + '", "size": "'+ str(size) +'"}'
   return json_string
-    
+
+def maxBond:
+  return book["BOND"]["BUYS"]    
     
 def convert(order_id, symbol, direction, price, size):
   json_string = '{"type": "convert", "order_id": "' + str(order_id) + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "size": "'+size +'"}'
@@ -31,7 +33,14 @@ def cancel(order_id):
   json_string = '{"type": "cancel", "order_id": "'+ str(order_id) + '"}'
   return json_string
     
-    
+def bestBuyPrice(symbol):
+  global book
+  return book[symbol]["buy"][0][0]
+
+def bestSellPrice(symbol):
+  global book
+  return book[symbol]["sell"][0][0]
+
 def processServerResponse(json_response):
   response_dict = json.loads(json_response)
   response_type = response_dict["type"]
@@ -63,7 +72,12 @@ def processServerResponse(json_response):
         
   return response_dict
 
-
+def shouldBuy():
+  global cash
+  if cash <= -50000:
+    return False
+  else:
+       
 
 def main():
   exchange = connect()
@@ -71,27 +85,19 @@ def main():
   print(json_string, file=exchange)
   hello_from_exchange = json.loads(exchange.readline())
   print(hello_from_exchange)
-  print(json_string, file=exchange)
   while 1:
     # read everything the server says
+    # call nevins thingo here probs
     try:
       message_from_exchange = json.loads(exchange.readline())
       print(message_from_exchange)
     except:
       pass
-    for i in range(1, 100):
-      json_string = '{"type": "add", "order_id": ' + str(i) + ', "symbol": "BOND", "dir": "BUY", "price": 999, "size": 1}'
-      try:
-        print(json_string, file=exchange)
-#	print("i am trying to buy")
-      except:
-        pass
-      json_string = '{"type": "add", "order_id": ' + str(i+100) + ', "symbol": "BOND", "dir": "SELL", "price": 1001, "size": 1}'
-      try:
-        print(json_string, file=exchange)
-#	print("i am trying to sell")
-      except:
-        pass
+    
+    # choose when to buy
+
+    # choose when to sell
+ 
 
 if __name__ == "__main__":
   main()
