@@ -16,12 +16,13 @@ def main():
     print(json_string, file=exchange)
     hello_from_exchange = json.loads(exchange.readline())
     print(hello_from_exchange)
-    json_string = '{"type": "add", "order_id": 1337, "symbol": "BOND", "dir": "BUY", "price": 999, "size": 1}'
     print(json_string, file=exchange)
     while 1:
-      hello_from_exchange = json.loads(exchange.readline())
-      print("test")
-      print(hello_from_exchange)
+    for i in range(1, 100):
+      json_string = '{"type": "add", "order_id": ' + str(i) + ', "symbol": "BOND", "dir": "BUY", "price": 999, "size": 1}'
+      print(json_string, file=exchange)
+      json_string = '{"type": "add", "order_id": ' + str(i+100) + ', "symbol": "BOND", "dir": "SELL", "price": 1001, "size": 1}'
 
+      print(json_string, file=exchange)
 if __name__ == "__main__":
     main()
