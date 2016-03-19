@@ -15,6 +15,10 @@ bond_fair = 1000
 book = {}
 # The buy/sell requests that are sent to the exchange
 orders = []
+
+# buy original prices
+original_prices = {}
+
 # The stocks that we own
 my_stock = {}
 order_id = 1
@@ -192,7 +196,10 @@ def processServerResponse(json_response, exchange):
     
     #this means that our order has been filled
     #so we should re-evaluate the state by saying hello
-    
+    if response_dict["dir"] == "BUY":
+      if respose_dict["price"] > original_prices[response_dict["symbol"]]:
+        original_prices[response_dict["order_id"]] = response_dict["price"]
+     
     json_string = '{"type": "hello", "team": "JURIEN"}'
     print(json_string, file=exchange)          
 
@@ -223,7 +230,7 @@ def recommendedPriceToSell(symbol):
   fair_price = fairPrice(symbol)
   price_to_sell = bestSellPrice(symbol)
   for i in range(0, len(book[symbol]['sell'])):
-    if price_to_sell > book[symbol]['sell'][i][0] and book[symbol]['sell'][i][0] > fair_price + 1:
+    if price_to_sell > book[symbol]['sell'][i][0] and book[symbol]['sell'][i][0] >= fair_price + 1:
       price_to_sell = books[symbol]['sell'][i][0] - 1 
   return price_to_sell  
     
@@ -231,8 +238,9 @@ def recommendedPriceToSell(symbol):
 def recommendedPriceToBuy(symbol):
   fair_price = fairPrice(symbol)
   price_to_buy = bestBuyPrice(symbol)
+
   for i in range(0, len(book[symbol]['buy'])):
-    if price_to_buy > book[symbol]['buy'][i][0] and book[symbol]['buy'][i][0] < fair_price - 1:
+    if price_to_buy > book[symbol]['buy'][i][0] and book[symbol]['buy'][i][0] <= fair_price - 1:
       price_to_buy = books[symbol]['buy'][i][0] + 1
   return price_to_buy   
     
