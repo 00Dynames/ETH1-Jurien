@@ -11,6 +11,7 @@ import time
 money = 0
 bond_fair = 1000
 
+my_stock = {}
 
 def connect():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -36,9 +37,14 @@ def cancel(order_id):
 def processServerResponse(json_response):
   response_dict = json.loads(json_response)
   response_type = response_dict["type"]
+  global my_stock
   global money
   if response_type == "hello":
     money = response_dict["cash"]
+    for symbol_dict in response_dict["symbols"]:
+      sym = symbol_dict["symbol"]
+      pos = symbol_dict["position"]
+      my_stock[sym] = pos
   elif response_type == "open":
     #update list of open orders
     pass
@@ -58,6 +64,12 @@ def processServerResponse(json_response):
     #remove the order from out local list
     print (response_dict["order_id"], response_dict["error"])
   elif response_type == "fill":        
+    #this means that our order has been filled
+    #so we should re-evaluate the state by saying hello
+    
+    json_string = '{"type": "hello", "team": "JURIEN"}'
+    print(json_string, file=exchange)          
+
     pass
   elif response_type == "out":    
     pass
