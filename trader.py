@@ -13,8 +13,6 @@ bond_fair = 1000
 book = {}
 orders = []
 
-
-
 my_stock = {}
 
 def connect():
@@ -27,7 +25,9 @@ def add(order_id, symbol, direction, price, size):
 
   json_string = '{"type": "add", "order_id": "' + str(order_id) + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "price": "' + str(price) + '", "size": "'+ str(size) +'"}'
   return json_string
-    
+
+def maxBond:
+  return book["BOND"]["BUYS"]    
     
 def convert(order_id, symbol, direction, price, size):
   json_string = '{"type": "convert", "order_id": "' + str(order_id) + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "size": "'+size +'"}'
@@ -42,6 +42,14 @@ def hello():
   print(json_string, file=exchange)
 
 # Handles server responses    
+def bestBuyPrice(symbol):
+  global book
+  return book[symbol]["buy"][0][0]
+
+def bestSellPrice(symbol):
+  global book
+  return book[symbol]["sell"][0][0]
+
 def processServerResponse(json_response):
   response_dict = json.loads(json_response)
   response_type = response_dict["type"]
@@ -96,14 +104,18 @@ def processServerResponse(json_response):
     pass
         
   return response_dict
-  
 
-def whatToBuy():
-  pass
-  
-def whatToSell():
-  pass
-  
+def fairPrice(symbol):
+  mid = (bestSellPrice(symbol) + bestBuyPrice(symbol)) / 2  
+  return mid
+
+def canBuy():
+  global cash
+  if cash <= -40000:
+    return False
+  else:
+    return True    
+    
 def main():
   exchange = connect()
   json_string = '{"type": "hello", "team": "JURIEN"}'
@@ -114,6 +126,7 @@ def main():
  
   while 1:
     # Read everything the server says  
+    # call nevins thingo here probs
     try:
       message_from_exchange = json.loads(exchange.readline())
       processServerResponse(message_from_exchange)
@@ -134,6 +147,9 @@ def main():
 #	print("i am trying to sell")
       except:
         pass
+     
+
+ 
 
 if __name__ == "__main__":
   main()
