@@ -21,7 +21,7 @@ order_id = 1
 
 def connect():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect(("10.0.254.41", 25001))
+    s.connect(("10.0.254.41", 25000))
     return s.makefile('w+', 1)
 
 # Converts to JSON string given the parameters below
@@ -144,6 +144,7 @@ def makeTrades(exchange):
   global orders
   for item in orders:
     print(item, file=exchange)
+  orders = []
 
 # Processes and handles the different server responses
 def processServerResponse(json_response, exchange):
