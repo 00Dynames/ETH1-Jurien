@@ -204,7 +204,7 @@ def main():
   while 1:
     # Read everything the server says  
     try:
-      message_from_exchange = json.loads(exchange.readline())
+      message_from_exchange = exchange.readline()
       processServerResponse(message_from_exchange, exchange)
       print(message_from_exchange)
     except:
@@ -213,7 +213,8 @@ def main():
     for i in range(1, 100):
 
       if book.has_key("BOND"):
-        print(bestBuyPrice("BOND"))
+        print(bestBuyPrice("BOND"))        
+      
       json_string = '{"type": "add", "order_id": ' + str(i) + ', "symbol": "BOND", "dir": "BUY", "price": 999, "size": 1}'
       try:
         print(json_string, file=exchange)
