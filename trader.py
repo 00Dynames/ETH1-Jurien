@@ -84,7 +84,7 @@ def whatToBuy():
   global order_id
   # Max number of bonds we buy in 1 transaction is 5
   symbol = "BOND"
-  size = 5
+  size = 1 
  # price = bestSellPrice(symbol)
   price = recommendedPriceToBuy(symbol)
   for j in range(10):
@@ -116,7 +116,7 @@ def whatToSell():
   global orders
   global order_id  
   symbol = "BOND"
-  size = "5"
+  size = 1
   price = recommendedPriceToSell(symbol)
   for j in range(10):
     if canSell(symbol) and price > 0:
@@ -240,22 +240,20 @@ def canBuy(symbol):
 def recommendedPriceToSell(symbol):
   fair_price = fairPrice(symbol)
   price_to_sell = bestSellPrice(symbol)
-  if not book.has_key(symbol):
+  if not book.has_key(symbol) or price_to_sell == 0:
     return -1
-  for i in range(0, len(book[symbol]['sell'])):
-    if price_to_sell > book[symbol]['sell'][i][0] and book[symbol]['sell'][i][0] > fair_price + 1:
-      price_to_sell = book[symbol]['sell'][i][0] - 1 
+  if not price_to_sell == fair_price:
+    price_to_sell -= 1
   return price_to_sell  
     
 # returns "pennied" price to buy
 def recommendedPriceToBuy(symbol):
   fair_price = fairPrice(symbol)
   price_to_buy = bestBuyPrice(symbol)
-  if not book.has_key(symbol):
+  if not book.has_key(symbol) or price_to_buy == 0:
     return -1
-  for i in range(0, len(book[symbol]['buy'])):
-    if price_to_buy > book[symbol]['buy'][i][0] and book[symbol]['buy'][i][0] < fair_price - 1:
-      price_to_buy = book[symbol]['buy'][i][0] + 1
+  if not price_to_buy == fair_price:
+    price_to_buy += 1
   return price_to_buy   
     
 def main():
