@@ -60,6 +60,9 @@ def bestSellPrice(symbol):
 
 # Returns the fair price of the stock assuming the market is correct
 def fairPrice(symbol):
+  if symbol == "BOND":
+    return 1000
+  
   mid = (bestSellPrice(symbol) + bestBuyPrice(symbol)) / 2  
   return mid
 
