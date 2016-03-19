@@ -82,7 +82,7 @@ def whatToBuy():
   symbol = "BOND"
   size = 5
  # price = bestSellPrice(symbol)
-  price = recommendedPriceToBuy(SYMBOL)
+  price = recommendedPriceToBuy(symbol)
   for j in range(10):
     if canBuy() and price > 0:
       buy_request = add(order_id, symbol, "BUY", price, size)
@@ -90,7 +90,7 @@ def whatToBuy():
       order_id += 1
   
   symbol = "VALBZ"
-  price = recommendedPriceToBuy(SYMBOL)
+  price = recommendedPriceToBuy(symbol)
   for j in range(10):
     if canBuy() and price > 0:
       buy_request = add(order_id, symbol, "BUY", price, size)
@@ -98,7 +98,7 @@ def whatToBuy():
       order_id += 1
       
   symbol = "VALE"
-  price = recommendedPriceToBuy(SYMBOL)
+  price = recommendedPriceToBuy(symbol)
   for j in range(10):
     if canBuy() and price > 0: 
       buy_request = add(order_id, symbol, "BUY", price, size)
@@ -112,7 +112,7 @@ def whatToSell():
   global order_id  
   symbol = "BOND"
   size = "5"
-  price = recommendedPriceToSell(SYMBOL)
+  price = recommendedPriceToSell(symbol)
   for j in range(10):
     if canSell() and price > 0:
       sell_request = add(order_id, symbol, "SELL", price, size)
@@ -120,7 +120,7 @@ def whatToSell():
       order_id += 1
 
   symbol = "VALBZ"
-  price = recommendedPriceToSell(SYMBOL)
+  price = recommendedPriceToSell(symbol)
   for j in range(10):
     if canSell() and price > 0:      
       sell_request = add(order_id, symbol, "SELL", price, size)
@@ -128,7 +128,7 @@ def whatToSell():
       order_id += 1
 
   symbol = "VALE"
-  price = recommendedPriceToSell(SYMBOL)
+  price = recommendedPriceToSell(symbol)
   for j in range(10):
     if canSell() and price > 0:      
       sell_request = add(order_id, symbol, "SELL", price, size)
