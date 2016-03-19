@@ -93,7 +93,7 @@ def main():
 #	print("i am trying to sell")
       except:
         pass
-      sleep(0.2)
+      time.sleep(0.2)
 
 if __name__ == "__main__":
   main()
