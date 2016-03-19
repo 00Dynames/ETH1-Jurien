@@ -52,6 +52,11 @@ def processServerResponse(json_response):
   elif response_type == "book":
     # Update our local copy of the book
     book[response_dict["symbol"]] = {"buy": response_dict["buy"], "sell": response_dict["sell"]}
+    # After each state is recorded, we make decisions on what to buy and what to sell
+    # Once we have a list of 100 actions, we send the requests to the exchange and then 
+    # process the results.
+    # whatToBuy()
+    # whatToSell()
     pass
 
   elif response_type == "trade":
@@ -72,9 +77,31 @@ def processServerResponse(json_response):
   return response_dict
   
 
+# Generates buy requests and adds it onto the orders list
 def whatToBuy():
-  
-def whatToSell():
+  # Max number of bonds we buy in 1 transaction is 5
+  symbol = "BOND"
+  size = 1
+  order_id = getOrderId()
+  price = bestSellPrice(symbol)
+  for j in range(50):
+    if canBuy(symbol) and price > 0
+      buy_request = '{"type": "add", "order_id": ' + str(order_id) + ', "symbol": ' + symbol + ', "dir": "BUY", "price": ' + price + ', "size": ' + size + ' }'
+      orders.insert(buy_request)
+
+
+
+# Generates sell requests and adds it onto the orders list
+def whatToSell():  
+  symbol = "BOND"
+  size = 1
+  order_id = getOrderId()
+  for j in range(100):
+    if canSell(symbol) and price > 0
+      sell_request = '{"type": "add", "order_id": ' + str(order_id) + ', "symbol": ' + symbol + ', "dir": "BUY", "price": ' + price + ', "size": ' + size + ' }'
+      orders.insert(sell_request)
+
+
 
 def main():
   exchange = connect()
