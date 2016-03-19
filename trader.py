@@ -81,7 +81,6 @@ def whatToBuy():
       orders.insert(buy_request)
       order_id += 1
   
-  size = 1
   symbol = "VALBZ"
   for j in range(10):
     if canBuy(symbol) and price > 0:
@@ -110,7 +109,6 @@ def whatToSell():
       order_id += 1
 
   symbol = "VALBZ"
-  size = 1
   for j in range(20):
     if canSell(symbol) and price > 0:
       sell_request = '{"type": "add", "order_id": ' + str(order_id) + ', "symbol": ' + symbol + ', "dir": "BUY", "price": ' + price + ', "size": ' + size + ' }'
@@ -118,7 +116,6 @@ def whatToSell():
       order_id += 1
 
   symbol = "VALE"
-  size = 1
   for j in range(20):
     if canSell(symbol) and price > 0:
       sell_request = '{"type": "add", "order_id": ' + str(order_id) + ', "symbol": ' + symbol + ', "dir": "BUY", "price": ' + price + ', "size": ' + size + ' }'
@@ -139,6 +136,7 @@ def processServerResponse(json_response, exchange):
   global my_stock
   global money
   global book
+  print(response_dict)
   if response_type == "hello":
     money = response_dict["cash"]
 
