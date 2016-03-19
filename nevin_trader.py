@@ -25,7 +25,7 @@ order_id = 1
 
 def connect():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect(("10.0.254.41", 25000))
+    s.connect(("10.0.254.41", 25001))
     return s.makefile('w+', 1)
 
 # Converts to JSON string given the parameters below
@@ -35,8 +35,8 @@ def add(order_id, symbol, direction, price, size):
   json_string = '{"type": "add", "order_id": ' + str(order_id) + ', "symbol": "' + symbol + '", "dir": "' + direction + '", "price": ' + str(price) + ', "size": '+ str(size) +'}'
   return json_string
 
-def convert(order_id, symbol, direction, price, size):
-  json_string = '{"type": "convert", "order_id": "' + str(order_id) + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "size": "'+size +'"}'
+def convert(order_id, symbol, direction,  size):
+  json_string = '{"type": "convert", "order_id": ' + str(order_id) + ', "symbol": "' + symbol + '", "dir": "' + direction + '", "size": '+str(size) +'}'
   return json_string
     
 def cancel(order_id):
@@ -52,16 +52,12 @@ def bestBuyPrice(symbol):
   global book
   if not book.has_key(symbol):
     return 0
-  elif not book[symbol]["buy"]:
-    return 0
   return book[symbol]["buy"][0][0]
 
 # The lowest someone is willing to sell out a share
 def bestSellPrice(symbol):
   global book
   if not book.has_key(symbol):
-    return 0
-  elif not book[symbol]["sell"]:
     return 0
   return book[symbol]["sell"][0][0]
 
@@ -92,7 +88,7 @@ def whatToBuy():
   global order_id
   # Max number of bonds we buy in 1 transaction is 5
   symbol = "BOND"
-  size = 6 
+  size = 5 
  # price = bestSellPrice(symbol)
   price = recommendedPriceToBuy(symbol)
   for j in range(10):
@@ -130,20 +126,6 @@ def whatToBuy():
       buy_request = add(int(round(time.time() * 1000)), symbol, "BUY", price, size)
       orders.append(buy_request)
       time.sleep(0.001)
-  symbol = "WFC"
-  price = recommendedPriceToBuy(symbol)
-  for j in range(4):
-    if canBuy(symbol) and price > 0: 
-      buy_request = add(int(round(time.time() * 1000)), symbol, "BUY", price, size)
-      orders.append(buy_request)
-      time.sleep(0.001)
-  symbol = "XLF"
-  price = recommendedPriceToBuy(symbol)
-  for j in range(5):
-    if canBuy(symbol) and price > 0: 
-      buy_request = add(int(round(time.time() * 1000)), symbol, "BUY", price, size)
-      orders.append(buy_request)
-      time.sleep(0.001)
 
 
 # Generates sell requests and adds it onto the orders list
@@ -151,55 +133,65 @@ def whatToSell():
   global orders
   global order_id  
   symbol = "BOND"
-  size = 6
+  size = 10
   price = recommendedPriceToSell(symbol)
-  for j in range(10):
+  for j in range(2):
     if canSell(symbol) and price > 0:
-      sell_request = add(int(round(time.time() * 1000)), symbol, "SELL", price, size)
+      sell_request = add(int(round(time.time() * 1000) % 1000000), symbol, "SELL", price, size)
+      buy_request = add(int(round(time.time() * 1000) % 1000000 + 10000), symbol, "BUY", price - 2, size)
       orders.append(sell_request)
+      orders.append(buy_request)
       time.sleep(0.001)
   symbol = "VALBZ"
-  size = "1"
+  size = "2"
   price = recommendedPriceToSell(symbol)
-  for j in range(5):
+  for j in range(1):
     if canSell(symbol) and price > 0:      
-      sell_request = add(int(round(time.time() * 1000)), symbol, "SELL", price, size)
+      if recommendedPriceToSell("VALE") > price + 4:
+        sell_request = add(int(round(time.time() * 1000) % 1000000), "VALE", "SELL", price, size)
+        change_request = convert(int(round(time.time() * 1000)% 1000000) + 20000, "VALE", "BUY", 4)
+        orders.append(change_request)
+
+      else:
+        sell_request = add(int(round(time.time() * 1000)), symbol, "SELL", price,size)
+      buy_request = add(int(round(time.time() * 1000) + 10000), symbol, "BUY", price - 5, size)
       orders.append(sell_request)
+      orders.append(buy_request)
       time.sleep(0.001)
   symbol = "VALE"
   price = recommendedPriceToSell(symbol)
-  for j in range(5):
+  for j in range(1):
     if canSell(symbol) and price > 0:      
-      sell_request = add(int(round(time.time() * 1000)), symbol, "SELL", price, size)
+      if recommendedPriceToSell("VALBZ") > price + 4:
+        sell_request = add(int(round(time.time() * 1000)), "VALBZ", "SELL", price, size)
+        change_request = convert(int(round(time.time() * 1000)% 1000000) + 20000, "VALBZ", "BUY",4)
+        orders.append(change_request)
+      else:
+        sell_request = add(int(round(time.time() * 1000)), symbol, "SELL", price,size)
+      buy_request = add(int(round(time.time() * 1000) + 10000), symbol, "BUY", price -5 , size)
       orders.append(sell_request)
+      orders.append(buy_request)
       time.sleep(0.001)
+  return
   symbol = "GS"
   price = recommendedPriceToSell(symbol)
-  for j in range(3):
+  for j in range(1):
     if canSell(symbol) and price > 0:      
-      sell_request = add(int(round(time.time() * 1000)), symbol, "SELL", price, size)
+      sell_request = add(int(round(time.time() * 1000)), symbol, "SELL", price,size)
+      buy_request = add(int(round(time.time() * 1000) % 1000000 + 10000), symbol, "BUY", price - 3, size)
       orders.append(sell_request)
+      orders.append(buy_request)
+
       time.sleep(0.001)
   symbol = "MS"
   price = recommendedPriceToSell(symbol)
   for j in range(5):
     if canSell(symbol) and price > 0:      
-      sell_request = add(int(round(time.time() * 1000)), symbol, "SELL", price, size)
+      sell_request = add(int(round(time.time() * 1000)), symbol, "SELL", price,size)
+      buy_request = add(int(round(time.time() * 1000) + 10000), symbol, "BUY", price - 2, size)
       orders.append(sell_request)
-      time.sleep(0.001)
-  symbol = "WFC"
-  price = recommendedPriceToSell(symbol)
-  for j in range(4):
-    if canSell(symbol) and price > 0:      
-      sell_request = add(int(round(time.time() * 1000)), symbol, "SELL", price, size)
-      orders.append(sell_request)
-      time.sleep(0.001)
-  symbol = "XLF"
-  price = recommendedPriceToSell(symbol)
-  for j in range(5):
-    if canSell(symbol) and price > 0:      
-      sell_request = add(int(round(time.time() * 1000)), symbol, "SELL", price, size)
-      orders.append(sell_request)
+      orders.append(buy_request)
+
       time.sleep(0.001)
       
       
@@ -297,8 +289,6 @@ def canBuy(symbol):
       return True
     elif symbol == "VALE" and my_stock[symbol] < 10:
       return True
-    elif my_stock[symbol] < 100:
-      return True
 
   return False
 
@@ -321,7 +311,7 @@ def recommendedPriceToBuy(symbol):
   price_to_buy = bestBuyPrice(symbol)
   if not book.has_key(symbol) or price_to_buy == 0:
     return -1
-  if not price_to_buy == fair_price and price_to_buy < fair_price:
+  if not price_to_buy == fair_price:
     price_to_buy += 1
   return price_to_buy   
     
@@ -342,10 +332,10 @@ def main():
     except:
       pass
 
-    whatToBuy()
+#    whatToBuy()
     whatToSell()
     makeTrades(exchange)
-    time.sleep(0.2)
+    time.sleep(0.5)
      
 if __name__ == "__main__":
   main()

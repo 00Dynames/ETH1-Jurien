@@ -1,0 +1,380 @@
+{u'symbols': [{u'position': 0, u'symbol': u'GS'}, {u'position': -1, u'symbol': u'BOND'}, {u'position': 0, u'symbol': u'MS'}, {u'position': 0, u'symbol': u'XLF'}, {u'position': 0, u'symbol': u'WFC'}, {u'position': -10, u'symbol': u'VALBZ'}, {u'position': 0, u'symbol': u'VALE'}], u'type': u'hello', u'cash': 43221}
+{u'symbols': [u'BOND', u'GS', u'MS', u'VALBZ', u'VALE', u'WFC', u'XLF'], u'type': u'open'}
+{"type":"open","symbols":["BOND","GS","MS","VALBZ","VALE","WFC","XLF"]}
+
+{u'sell': [[4236, 5], [4240, 1], [4241, 2], [4242, 3], [4246, 1], [4247, 1]], u'symbol': u'VALE', u'buy': [[4209, 5], [4208, 1], [4207, 6], [4206, 2], [4204, 1], [4202, 5], [4200, 1], [4194, 2]], u'type': u'book'}
+{"type":"book","symbol":"VALE","buy":[[4209,5],[4208,1],[4207,6],[4206,2],[4204,1],[4202,5],[4200,1],[4194,2]],"sell":[[4236,5],[4240,1],[4241,2],[4242,3],[4246,1],[4247,1]]}
+
+{u'sell': [[4236, 13]], u'symbol': u'VALBZ', u'buy': [[4233, 3], [4232, 15], [4231, 6]], u'type': u'book'}
+{"type":"book","symbol":"VALBZ","buy":[[4233,3],[4232,15],[4231,6]],"sell":[[4236,13]]}
+
+{u'sell': [[4905, 5], [4906, 7], [4907, 1], [4908, 6], [4909, 4]], u'symbol': u'WFC', u'buy': [[4903, 8], [4901, 3], [4898, 2], [4896, 1], [4895, 6], [4893, 5]], u'type': u'book'}
+{"type":"book","symbol":"WFC","buy":[[4903,8],[4901,3],[4898,2],[4896,1],[4895,6],[4893,5]],"sell":[[4905,5],[4906,7],[4907,1],[4908,6],[4909,4]]}
+
+{u'sell': [[3805, 1], [3811, 1], [3816, 4], [3817, 1]], u'symbol': u'XLF', u'buy': [[3795, 1], [3787, 1], [3782, 2], [3770, 2], [3769, 2], [3768, 1], [3767, 1], [3763, 3], [3751, 3]], u'type': u'book'}
+{"type":"book","symbol":"XLF","buy":[[3795,1],[3787,1],[3782,2],[3770,2],[3769,2],[3768,1],[3767,1],[3763,3],[3751,3]],"sell":[[3805,1],[3811,1],[3816,4],[3817,1]]}
+
+{u'sell': [[3704, 5], [3705, 7], [3706, 4]], u'symbol': u'MS', u'buy': [[3703, 2], [3702, 6], [3701, 2], [3700, 7], [3699, 2], [3698, 1], [3697, 4], [3695, 4]], u'type': u'book'}
+{"type":"book","symbol":"MS","buy":[[3703,2],[3702,6],[3701,2],[3700,7],[3699,2],[3698,1],[3697,4],[3695,4]],"sell":[[3704,5],[3705,7],[3706,4]]}
+
+{u'sell': [[1000, 14], [1001, 1]], u'symbol': u'BOND', u'buy': [[999, 4], [998, 4], [997, 3]], u'type': u'book'}
+{"type":"book","symbol":"BOND","buy":[[999,4],[998,4],[997,3]],"sell":[[1000,14],[1001,1]]}
+
+{u'sell': [[6907, 6], [6908, 4]], u'symbol': u'GS', u'buy': [[6905, 1], [6903, 3], [6902, 1], [6901, 2], [6899, 4]], u'type': u'book'}
+{"type":"book","symbol":"GS","buy":[[6905,1],[6903,3],[6902,1],[6901,2],[6899,4]],"sell":[[6907,6],[6908,4]]}
+
+{u'type': u'error', u'error': u'PROTOCOL_ERROR:DUPLICATE_HELLO'}
+PROTOCOL_ERROR:DUPLICATE_HELLO
+{"type":"error","error":"PROTOCOL_ERROR:DUPLICATE_HELLO"}
+
+{u'order_id': 1, u'type': u'ack'}
+{"type":"ack","order_id":1}
+
+{u'sell': [[4236, 5], [4240, 1], [4241, 2], [4242, 3], [4246, 1], [4247, 1]], u'symbol': u'VALE', u'buy': [[4209, 5], [4208, 1], [4207, 6], [4206, 2], [4204, 1], [4202, 5], [4200, 1], [4194, 3]], u'type': u'book'}
+{"type":"book","symbol":"VALE","buy":[[4209,5],[4208,1],[4207,6],[4206,2],[4204,1],[4202,5],[4200,1],[4194,3]],"sell":[[4236,5],[4240,1],[4241,2],[4242,3],[4246,1],[4247,1]]}
+
+{u'order_id': 2, u'type': u'ack'}
+{"type":"ack","order_id":2}
+
+{u'sell': [[4236, 5], [4240, 1], [4241, 2], [4242, 3], [4246, 1], [4247, 1]], u'symbol': u'VALE', u'buy': [[4209, 5], [4208, 1], [4207, 6], [4206, 2], [4204, 1], [4202, 5], [4200, 1], [4194, 4]], u'type': u'book'}
+{"type":"book","symbol":"VALE","buy":[[4209,5],[4208,1],[4207,6],[4206,2],[4204,1],[4202,5],[4200,1],[4194,4]],"sell":[[4236,5],[4240,1],[4241,2],[4242,3],[4246,1],[4247,1]]}
+
+{u'order_id': 3, u'type': u'ack'}
+{"type":"ack","order_id":3}
+
+{u'sell': [[4236, 5], [4240, 1], [4241, 2], [4242, 3], [4246, 1], [4247, 1]], u'symbol': u'VALE', u'buy': [[4209, 5], [4208, 1], [4207, 6], [4206, 2], [4204, 1], [4202, 5], [4200, 1], [4194, 5]], u'type': u'book'}
+{"type":"book","symbol":"VALE","buy":[[4209,5],[4208,1],[4207,6],[4206,2],[4204,1],[4202,5],[4200,1],[4194,5]],"sell":[[4236,5],[4240,1],[4241,2],[4242,3],[4246,1],[4247,1]]}
+
+{u'order_id': 4, u'type': u'ack'}
+{"type":"ack","order_id":4}
+
+{u'sell': [[4236, 5], [4240, 1], [4241, 2], [4242, 3], [4246, 1], [4247, 1]], u'symbol': u'VALE', u'buy': [[4209, 5], [4208, 1], [4207, 6], [4206, 2], [4204, 1], [4202, 5], [4200, 1], [4194, 6]], u'type': u'book'}
+{"type":"book","symbol":"VALE","buy":[[4209,5],[4208,1],[4207,6],[4206,2],[4204,1],[4202,5],[4200,1],[4194,6]],"sell":[[4236,5],[4240,1],[4241,2],[4242,3],[4246,1],[4247,1]]}
+
+{u'order_id': 5, u'type': u'ack'}
+{"type":"ack","order_id":5}
+
+{u'sell': [[4236, 5], [4240, 1], [4241, 2], [4242, 3], [4246, 1], [4247, 1]], u'symbol': u'VALE', u'buy': [[4209, 5], [4208, 1], [4207, 6], [4206, 2], [4204, 1], [4202, 5], [4200, 1], [4194, 7]], u'type': u'book'}
+{"type":"book","symbol":"VALE","buy":[[4209,5],[4208,1],[4207,6],[4206,2],[4204,1],[4202,5],[4200,1],[4194,7]],"sell":[[4236,5],[4240,1],[4241,2],[4242,3],[4246,1],[4247,1]]}
+
+{u'order_id': 6, u'type': u'ack'}
+{"type":"ack","order_id":6}
+
+{u'sell': [[4236, 6], [4240, 1], [4241, 2], [4242, 3], [4246, 1], [4247, 1]], u'symbol': u'VALE', u'buy': [[4209, 5], [4208, 1], [4207, 6], [4206, 2], [4204, 1], [4202, 5], [4200, 1], [4194, 7]], u'type': u'book'}
+{"type":"book","symbol":"VALE","buy":[[4209,5],[4208,1],[4207,6],[4206,2],[4204,1],[4202,5],[4200,1],[4194,7]],"sell":[[4236,6],[4240,1],[4241,2],[4242,3],[4246,1],[4247,1]]}
+
+{u'order_id': 7, u'type': u'ack'}
+{"type":"ack","order_id":7}
+
+{u'sell': [[4236, 7], [4240, 1], [4241, 2], [4242, 3], [4246, 1], [4247, 1]], u'symbol': u'VALE', u'buy': [[4209, 5], [4208, 1], [4207, 6], [4206, 2], [4204, 1], [4202, 5], [4200, 1], [4194, 7]], u'type': u'book'}
+{"type":"book","symbol":"VALE","buy":[[4209,5],[4208,1],[4207,6],[4206,2],[4204,1],[4202,5],[4200,1],[4194,7]],"sell":[[4236,7],[4240,1],[4241,2],[4242,3],[4246,1],[4247,1]]}
+
+{u'order_id': 8, u'type': u'ack'}
+{"type":"ack","order_id":8}
+
+{u'sell': [[4236, 8], [4240, 1], [4241, 2], [4242, 3], [4246, 1], [4247, 1]], u'symbol': u'VALE', u'buy': [[4209, 5], [4208, 1], [4207, 6], [4206, 2], [4204, 1], [4202, 5], [4200, 1], [4194, 7]], u'type': u'book'}
+{"type":"book","symbol":"VALE","buy":[[4209,5],[4208,1],[4207,6],[4206,2],[4204,1],[4202,5],[4200,1],[4194,7]],"sell":[[4236,8],[4240,1],[4241,2],[4242,3],[4246,1],[4247,1]]}
+
+{u'order_id': 9, u'type': u'ack'}
+{"type":"ack","order_id":9}
+
+{u'sell': [[4236, 9], [4240, 1], [4241, 2], [4242, 3], [4246, 1], [4247, 1]], u'symbol': u'VALE', u'buy': [[4209, 5], [4208, 1], [4207, 6], [4206, 2], [4204, 1], [4202, 5], [4200, 1], [4194, 7]], u'type': u'book'}
+{"type":"book","symbol":"VALE","buy":[[4209,5],[4208,1],[4207,6],[4206,2],[4204,1],[4202,5],[4200,1],[4194,7]],"sell":[[4236,9],[4240,1],[4241,2],[4242,3],[4246,1],[4247,1]]}
+
+{u'order_id': 10, u'type': u'ack'}
+{"type":"ack","order_id":10}
+
+{u'sell': [[4236, 10], [4240, 1], [4241, 2], [4242, 3], [4246, 1], [4247, 1]], u'symbol': u'VALE', u'buy': [[4209, 5], [4208, 1], [4207, 6], [4206, 2], [4204, 1], [4202, 5], [4200, 1], [4194, 7]], u'type': u'book'}
+{"type":"book","symbol":"VALE","buy":[[4209,5],[4208,1],[4207,6],[4206,2],[4204,1],[4202,5],[4200,1],[4194,7]],"sell":[[4236,10],[4240,1],[4241,2],[4242,3],[4246,1],[4247,1]]}
+
+{u'sell': [[3805, 1], [3811, 1], [3816, 4], [3817, 1], [3826, 2]], u'symbol': u'XLF', u'buy': [[3795, 1], [3787, 1], [3782, 2], [3770, 2], [3769, 2], [3768, 1], [3767, 1], [3763, 3], [3751, 3]], u'type': u'book'}
+{"type":"book","symbol":"XLF","buy":[[3795,1],[3787,1],[3782,2],[3770,2],[3769,2],[3768,1],[3767,1],[3763,3],[3751,3]],"sell":[[3805,1],[3811,1],[3816,4],[3817,1],[3826,2]]}
+
+{u'order_id': 1, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+1 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":1,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 2, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+2 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":2,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 3, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+3 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":3,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 4, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+4 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":4,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 5, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+5 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":5,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 6, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+6 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":6,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 7, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+7 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":7,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 8, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+8 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":8,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 9, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+9 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":9,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 10, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+10 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":10,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 11, u'type': u'ack'}
+{"type":"ack","order_id":11}
+
+{u'sell': [[4236, 13]], u'symbol': u'VALBZ', u'buy': [[4233, 3], [4232, 15], [4231, 7]], u'type': u'book'}
+{"type":"book","symbol":"VALBZ","buy":[[4233,3],[4232,15],[4231,7]],"sell":[[4236,13]]}
+
+{u'order_id': 12, u'type': u'ack'}
+{"type":"ack","order_id":12}
+
+{u'sell': [[4236, 13]], u'symbol': u'VALBZ', u'buy': [[4233, 3], [4232, 15], [4231, 8]], u'type': u'book'}
+{"type":"book","symbol":"VALBZ","buy":[[4233,3],[4232,15],[4231,8]],"sell":[[4236,13]]}
+
+{u'order_id': 13, u'type': u'ack'}
+{"type":"ack","order_id":13}
+
+{u'sell': [[4236, 13]], u'symbol': u'VALBZ', u'buy': [[4233, 3], [4232, 15], [4231, 9]], u'type': u'book'}
+{"type":"book","symbol":"VALBZ","buy":[[4233,3],[4232,15],[4231,9]],"sell":[[4236,13]]}
+
+{u'order_id': 14, u'type': u'ack'}
+{"type":"ack","order_id":14}
+
+{u'sell': [[4236, 13]], u'symbol': u'VALBZ', u'buy': [[4233, 3], [4232, 15], [4231, 10]], u'type': u'book'}
+{"type":"book","symbol":"VALBZ","buy":[[4233,3],[4232,15],[4231,10]],"sell":[[4236,13]]}
+
+{u'order_id': 15, u'type': u'ack'}
+{"type":"ack","order_id":15}
+
+{u'sell': [[4236, 13]], u'symbol': u'VALBZ', u'buy': [[4233, 3], [4232, 15], [4231, 11]], u'type': u'book'}
+{"type":"book","symbol":"VALBZ","buy":[[4233,3],[4232,15],[4231,11]],"sell":[[4236,13]]}
+
+{u'order_id': 16, u'type': u'ack'}
+{"type":"ack","order_id":16}
+
+{u'sell': [[4236, 10], [4240, 1], [4241, 2], [4242, 3], [4246, 1], [4247, 1]], u'symbol': u'VALE', u'buy': [[4209, 5], [4208, 1], [4207, 6], [4206, 2], [4204, 1], [4202, 5], [4200, 1], [4194, 8]], u'type': u'book'}
+{"type":"book","symbol":"VALE","buy":[[4209,5],[4208,1],[4207,6],[4206,2],[4204,1],[4202,5],[4200,1],[4194,8]],"sell":[[4236,10],[4240,1],[4241,2],[4242,3],[4246,1],[4247,1]]}
+
+{u'order_id': 17, u'type': u'ack'}
+{"type":"ack","order_id":17}
+
+{u'sell': [[4236, 10], [4240, 1], [4241, 2], [4242, 3], [4246, 1], [4247, 1]], u'symbol': u'VALE', u'buy': [[4209, 5], [4208, 1], [4207, 6], [4206, 2], [4204, 1], [4202, 5], [4200, 1], [4194, 9]], u'type': u'book'}
+{"type":"book","symbol":"VALE","buy":[[4209,5],[4208,1],[4207,6],[4206,2],[4204,1],[4202,5],[4200,1],[4194,9]],"sell":[[4236,10],[4240,1],[4241,2],[4242,3],[4246,1],[4247,1]]}
+
+{u'order_id': 18, u'type': u'ack'}
+{"type":"ack","order_id":18}
+
+{u'sell': [[4236, 10], [4240, 1], [4241, 2], [4242, 3], [4246, 1], [4247, 1]], u'symbol': u'VALE', u'buy': [[4209, 5], [4208, 1], [4207, 6], [4206, 2], [4204, 1], [4202, 5], [4200, 1], [4194, 10]], u'type': u'book'}
+{"type":"book","symbol":"VALE","buy":[[4209,5],[4208,1],[4207,6],[4206,2],[4204,1],[4202,5],[4200,1],[4194,10]],"sell":[[4236,10],[4240,1],[4241,2],[4242,3],[4246,1],[4247,1]]}
+
+{u'order_id': 19, u'type': u'ack'}
+{"type":"ack","order_id":19}
+
+{u'sell': [[4236, 10], [4240, 1], [4241, 2], [4242, 3], [4246, 1], [4247, 1]], u'symbol': u'VALE', u'buy': [[4209, 5], [4208, 1], [4207, 6], [4206, 2], [4204, 1], [4202, 5], [4200, 1], [4194, 11]], u'type': u'book'}
+{"type":"book","symbol":"VALE","buy":[[4209,5],[4208,1],[4207,6],[4206,2],[4204,1],[4202,5],[4200,1],[4194,11]],"sell":[[4236,10],[4240,1],[4241,2],[4242,3],[4246,1],[4247,1]]}
+
+{u'order_id': 20, u'type': u'ack'}
+{"type":"ack","order_id":20}
+
+{u'sell': [[4236, 10], [4240, 1], [4241, 2], [4242, 3], [4246, 1], [4247, 1]], u'symbol': u'VALE', u'buy': [[4209, 5], [4208, 1], [4207, 6], [4206, 2], [4204, 1], [4202, 5], [4200, 1], [4194, 12]], u'type': u'book'}
+{"type":"book","symbol":"VALE","buy":[[4209,5],[4208,1],[4207,6],[4206,2],[4204,1],[4202,5],[4200,1],[4194,12]],"sell":[[4236,10],[4240,1],[4241,2],[4242,3],[4246,1],[4247,1]]}
+
+{u'order_id': 21, u'type': u'reject', u'error': u'LIMIT:POSITION'}
+21 LIMIT:POSITION
+{"type":"reject","order_id":21,"error":"LIMIT:POSITION"}
+
+{u'order_id': 22, u'type': u'reject', u'error': u'LIMIT:POSITION'}
+22 LIMIT:POSITION
+{"type":"reject","order_id":22,"error":"LIMIT:POSITION"}
+
+{u'order_id': 23, u'type': u'reject', u'error': u'LIMIT:POSITION'}
+23 LIMIT:POSITION
+{"type":"reject","order_id":23,"error":"LIMIT:POSITION"}
+
+{u'order_id': 24, u'type': u'reject', u'error': u'LIMIT:POSITION'}
+24 LIMIT:POSITION
+{"type":"reject","order_id":24,"error":"LIMIT:POSITION"}
+
+{u'order_id': 25, u'type': u'reject', u'error': u'LIMIT:POSITION'}
+25 LIMIT:POSITION
+{"type":"reject","order_id":25,"error":"LIMIT:POSITION"}
+
+{u'order_id': 26, u'type': u'ack'}
+{"type":"ack","order_id":26}
+
+{u'sell': [[4236, 11], [4240, 1], [4241, 2], [4242, 3], [4246, 1], [4247, 1]], u'symbol': u'VALE', u'buy': [[4209, 5], [4208, 1], [4207, 6], [4206, 2], [4204, 1], [4202, 5], [4200, 1], [4194, 12]], u'type': u'book'}
+{"type":"book","symbol":"VALE","buy":[[4209,5],[4208,1],[4207,6],[4206,2],[4204,1],[4202,5],[4200,1],[4194,12]],"sell":[[4236,11],[4240,1],[4241,2],[4242,3],[4246,1],[4247,1]]}
+
+{u'order_id': 27, u'type': u'ack'}
+{"type":"ack","order_id":27}
+
+{u'sell': [[4236, 12], [4240, 1], [4241, 2], [4242, 3], [4246, 1], [4247, 1]], u'symbol': u'VALE', u'buy': [[4209, 5], [4208, 1], [4207, 6], [4206, 2], [4204, 1], [4202, 5], [4200, 1], [4194, 12]], u'type': u'book'}
+{"type":"book","symbol":"VALE","buy":[[4209,5],[4208,1],[4207,6],[4206,2],[4204,1],[4202,5],[4200,1],[4194,12]],"sell":[[4236,12],[4240,1],[4241,2],[4242,3],[4246,1],[4247,1]]}
+
+{u'order_id': 28, u'type': u'ack'}
+{"type":"ack","order_id":28}
+
+{u'sell': [[4236, 13], [4240, 1], [4241, 2], [4242, 3], [4246, 1], [4247, 1]], u'symbol': u'VALE', u'buy': [[4209, 5], [4208, 1], [4207, 6], [4206, 2], [4204, 1], [4202, 5], [4200, 1], [4194, 12]], u'type': u'book'}
+{"type":"book","symbol":"VALE","buy":[[4209,5],[4208,1],[4207,6],[4206,2],[4204,1],[4202,5],[4200,1],[4194,12]],"sell":[[4236,13],[4240,1],[4241,2],[4242,3],[4246,1],[4247,1]]}
+
+{u'order_id': 29, u'type': u'ack'}
+{"type":"ack","order_id":29}
+
+{u'sell': [[4236, 14], [4240, 1], [4241, 2], [4242, 3], [4246, 1], [4247, 1]], u'symbol': u'VALE', u'buy': [[4209, 5], [4208, 1], [4207, 6], [4206, 2], [4204, 1], [4202, 5], [4200, 1], [4194, 12]], u'type': u'book'}
+{"type":"book","symbol":"VALE","buy":[[4209,5],[4208,1],[4207,6],[4206,2],[4204,1],[4202,5],[4200,1],[4194,12]],"sell":[[4236,14],[4240,1],[4241,2],[4242,3],[4246,1],[4247,1]]}
+
+{u'order_id': 30, u'type': u'ack'}
+{"type":"ack","order_id":30}
+
+{u'sell': [[4236, 15], [4240, 1], [4241, 2], [4242, 3], [4246, 1], [4247, 1]], u'symbol': u'VALE', u'buy': [[4209, 5], [4208, 1], [4207, 6], [4206, 2], [4204, 1], [4202, 5], [4200, 1], [4194, 12]], u'type': u'book'}
+{"type":"book","symbol":"VALE","buy":[[4209,5],[4208,1],[4207,6],[4206,2],[4204,1],[4202,5],[4200,1],[4194,12]],"sell":[[4236,15],[4240,1],[4241,2],[4242,3],[4246,1],[4247,1]]}
+
+{u'sell': [[6907, 6], [6908, 3]], u'symbol': u'GS', u'buy': [[6905, 1], [6903, 3], [6902, 1], [6901, 2], [6899, 4]], u'type': u'book'}
+{"type":"book","symbol":"GS","buy":[[6905,1],[6903,3],[6902,1],[6901,2],[6899,4]],"sell":[[6907,6],[6908,3]]}
+
+{u'sell': [[3798, 2], [3805, 1], [3811, 1], [3816, 4], [3817, 1], [3826, 2]], u'symbol': u'XLF', u'buy': [[3795, 1], [3787, 1], [3782, 2], [3770, 2], [3769, 2], [3768, 1], [3767, 1], [3763, 3], [3751, 3]], u'type': u'book'}
+{"type":"book","symbol":"XLF","buy":[[3795,1],[3787,1],[3782,2],[3770,2],[3769,2],[3768,1],[3767,1],[3763,3],[3751,3]],"sell":[[3798,2],[3805,1],[3811,1],[3816,4],[3817,1],[3826,2]]}
+
+{u'sell': [[6906, 3], [6907, 6], [6908, 3]], u'symbol': u'GS', u'buy': [[6905, 1], [6903, 3], [6902, 1], [6901, 2], [6899, 4]], u'type': u'book'}
+{"type":"book","symbol":"GS","buy":[[6905,1],[6903,3],[6902,1],[6901,2],[6899,4]],"sell":[[6906,3],[6907,6],[6908,3]]}
+
+{u'order_id': 1, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+1 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":1,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 2, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+2 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":2,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 3, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+3 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":3,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 4, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+4 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":4,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 5, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+5 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":5,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 6, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+6 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":6,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 7, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+7 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":7,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 8, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+8 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":8,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 9, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+9 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":9,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 10, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+10 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":10,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 11, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+11 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":11,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 12, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+12 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":12,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 13, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+13 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":13,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 14, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+14 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":14,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 15, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+15 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":15,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 16, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+16 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":16,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 17, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+17 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":17,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 18, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+18 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":18,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 19, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+19 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":19,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 20, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+20 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":20,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 21, u'type': u'reject', u'error': u'LIMIT:POSITION'}
+21 LIMIT:POSITION
+{"type":"reject","order_id":21,"error":"LIMIT:POSITION"}
+
+{u'order_id': 22, u'type': u'reject', u'error': u'LIMIT:POSITION'}
+22 LIMIT:POSITION
+{"type":"reject","order_id":22,"error":"LIMIT:POSITION"}
+
+{u'order_id': 23, u'type': u'reject', u'error': u'LIMIT:POSITION'}
+23 LIMIT:POSITION
+{"type":"reject","order_id":23,"error":"LIMIT:POSITION"}
+
+{u'order_id': 24, u'type': u'reject', u'error': u'LIMIT:POSITION'}
+24 LIMIT:POSITION
+{"type":"reject","order_id":24,"error":"LIMIT:POSITION"}
+
+{u'order_id': 25, u'type': u'reject', u'error': u'LIMIT:POSITION'}
+25 LIMIT:POSITION
+{"type":"reject","order_id":25,"error":"LIMIT:POSITION"}
+
+{u'order_id': 26, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+26 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":26,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 27, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+27 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":27,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 28, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+28 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":28,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 29, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+29 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":29,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 30, u'type': u'reject', u'error': u'DUPLICATE_ORDER_ID'}
+30 DUPLICATE_ORDER_ID
+{"type":"reject","order_id":30,"error":"DUPLICATE_ORDER_ID"}
+
+{u'order_id': 31, u'type': u'ack'}
+{"type":"ack","order_id":31}
+
+{u'sell': [[4236, 13]], u'symbol': u'VALBZ', u'buy': [[4233, 3], [4232, 15], [4231, 12]], u'type': u'book'}
+{"type":"book","symbol":"VALBZ","buy":[[4233,3],[4232,15],[4231,12]],"sell":[[4236,13]]}
+
+{u'order_id': 32, u'type': u'ack'}
+{"type":"ack","order_id":32}
+

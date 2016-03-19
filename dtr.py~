@@ -1,0 +1,44 @@
+#!/usr/bin/python
+
+from __future__ import print_function
+import sys, socket, json, time
+
+#GLOBALS
+
+# The amount of money we have
+money = 0
+bond_fair = 1000
+# The current state of the market
+book = {}
+# The buy/sell requests that are sent to the exchange
+orders = []
+# The stocks that we own
+my_stock = {"BOND": 0, "VALBZ": 0, "VALE": 0, "GS": 0, "MS": 0, "WFC": 0, "XLF": 0}
+order_id = 1
+
+def connect():
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect(("10.0.254.41", 25001))
+    return s.makefile('w+', 1)
+
+def main():
+  exchange = connect()
+  json_string = '{"type": "hello", "team": "JURIEN"}\n'
+  print(json_string, file=exchange)
+  hello_from_exchange = json.loads(exchange.readline())
+  print(hello_from_exchange)
+  global book
+
+  while 1:    # Read everything the server says  
+    try:
+      message_from_exchange = exchange.readline()
+      processServerResponse(message_from_exchange, exchange)
+      print(message_from_exchange)
+    except:
+      pass
+
+
+
+
+if __name__ == "__main__":
+  main()
