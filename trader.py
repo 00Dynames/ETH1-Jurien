@@ -88,7 +88,7 @@ def whatToBuy():
   global order_id
   # Max number of bonds we buy in 1 transaction is 5
   symbol = "BOND"
-  size = 1 
+  size = 5 
  # price = bestSellPrice(symbol)
   price = recommendedPriceToBuy(symbol)
   for j in range(10):
@@ -133,7 +133,7 @@ def whatToSell():
   global orders
   global order_id  
   symbol = "BOND"
-  size = 1
+  size = 5
   price = recommendedPriceToSell(symbol)
   for j in range(10):
     if canSell(symbol) and price > 0:
