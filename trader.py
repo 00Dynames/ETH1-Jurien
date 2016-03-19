@@ -119,13 +119,20 @@ def main():
       pass
 
     for i in range(1, 100):
-      json_string = '{"type": "add", "order_id": ' + str(i) + ', "symbol": "BOND", "dir": "BUY", "price": 999, "size": 1}'
+      if (i % 25 == 0):
+        json_string = '{"type": "add", "order_id": ' + str(i) + ', "symbol": "MS", "dir": "BUY", "price": 3795, "size": 1}'
+      else:
+        json_string = '{"type": "add", "order_id": ' + str(i) + ', "symbol": "BOND", "dir": "BUY", "price": 999, "size": 1}'
       try:
         print(json_string, file=exchange)
 #	print("i am trying to buy")
       except:
         pass
-      json_string = '{"type": "add", "order_id": ' + str(i+100) + ', "symbol": "BOND", "dir": "SELL", "price": 1001, "size": 1}'
+      
+      if (i % 25 == 100):
+        json_string = '{"type": "add", "order_id": ' + str(i+100) + ', "symbol": "MS", "dir": "3785", "price": , "size": 1}'
+      else:
+        json_string = '{"type": "add", "order_id": ' + str(i+100) + ', "symbol": "BOND", "dir": "SELL", "price": 1001, "size": 1}'
       try:
         print(json_string, file=exchange)
 #	print("i am trying to sell")
