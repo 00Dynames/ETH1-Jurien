@@ -16,7 +16,7 @@ book = {}
 # The buy/sell requests that are sent to the exchange
 orders = []
 # The stocks that we own
-my_stock = {}
+my_stock = {"BOND": 0, "VALBZ": 0, "VALE": 0, "GS": 0, "MS": 0, "WFC": 0, "XLF": 0}
 order_id = 1
 
 def connect():
@@ -66,16 +66,16 @@ def fairPrice(symbol):
   mid = (bestSellPrice(symbol) + bestBuyPrice(symbol)) / 2  
   return mid
 
-# Whether we have enough money to risk buying stocks
-def canBuy():
-  global money
-  if money <= -40000:
+def canSell(symbol):
+  if not my_stock.has_key(symbol):
     return False
-  else:
-    return True    
-   
-def canSell():
-  return True
+  if symbol == "VALBZ" and my_stock[symbol] > -10:
+    return True
+  elif symbol == "VALE" and my_stock[symbol] > -10:
+    return True
+  elif my_stock[symbol] > -100:
+    return True
+  return False
 
  
 # Generates buy requests and adds it onto the orders list
@@ -88,7 +88,7 @@ def whatToBuy():
  # price = bestSellPrice(symbol)
   price = recommendedPriceToBuy(symbol)
   for j in range(10):
-    if canBuy() and price > 0:
+    if canBuy(symbol) and price > 0:
       buy_request = add(order_id, symbol, "BUY", price, size)
       orders.append(buy_request)
       order_id += 1
@@ -97,7 +97,7 @@ def whatToBuy():
   size = "1"
   price = recommendedPriceToBuy(symbol)
   for j in range(5):
-    if canBuy() and price > 0:
+    if canBuy(symbol) and price > 0:
       buy_request = add(order_id, symbol, "BUY", price, size)
       orders.append(buy_request)
       order_id += 1
@@ -105,7 +105,7 @@ def whatToBuy():
   symbol = "VALE"
   price = recommendedPriceToBuy(symbol)
   for j in range(5):
-    if canBuy() and price > 0: 
+    if canBuy(symbol) and price > 0: 
       buy_request = add(order_id, symbol, "BUY", price, size)
       orders.append(buy_request)
       order_id += 1
@@ -119,7 +119,7 @@ def whatToSell():
   size = "5"
   price = recommendedPriceToSell(symbol)
   for j in range(10):
-    if canSell() and price > 0:
+    if canSell(symbol) and price > 0:
       sell_request = add(order_id, symbol, "SELL", price, size)
       orders.append(sell_request)
       order_id += 1
@@ -128,7 +128,7 @@ def whatToSell():
   size = "1"
   price = recommendedPriceToSell(symbol)
   for j in range(5):
-    if canSell() and price > 0:      
+    if canSell(symbol) and price > 0:      
       sell_request = add(order_id, symbol, "SELL", price, size)
       orders.append(sell_request)
       order_id += 1
@@ -136,7 +136,7 @@ def whatToSell():
   symbol = "VALE"
   price = recommendedPriceToSell(symbol)
   for j in range(5):
-    if canSell() and price > 0:      
+    if canSell(symbol) and price > 0:      
       sell_request = add(order_id, symbol, "SELL", price, size)
       orders.append(sell_request)
       order_id += 1
@@ -198,6 +198,11 @@ def processServerResponse(json_response, exchange):
 
   elif response_type == "fill":        
     print(response_dict)
+    if response_dict["dir"] == "BUY":
+      my_stock[response_dict["symbol"]] += response_dict["size"] 
+    else:
+      my_stock[response_dict["symbol"]] -= response_dict["size"] 
+    
     hello()
     
     #this means that our order has been filled
@@ -214,12 +219,21 @@ def processServerResponse(json_response, exchange):
   return response_dict
 
 
-def canBuy():
+def canBuy(symbol):
   global money
   if money <= -40000:
     return False
   else:
-    return True    
+    if not my_stock.has_key(symbol):
+      return False
+    if symbol == "BOND" and my_stock[symbol] < 100: 
+      return True   
+    elif symbol == "VALBZ" and my_stock[symbol] < 10:
+      return True
+    elif symbol == "VALE" and my_stock[symbol] < 10:
+      return True
+
+  return False
 
 # gives the lowest selling price to sell quickly
 # returns "pennied" price to sell
