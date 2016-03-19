@@ -4,13 +4,13 @@ from __future__ import print_function
 import sys
 import socket
 import json
-import time
 
 #GLOBALS
 
 money = 0
 bond_fair = 1000
-
+book = {}
+orders = []
 
 def connect():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -32,11 +32,13 @@ def cancel(order_id):
   json_string = '{"type": "cancel", "order_id": "'+ str(order_id) + '"}'
   return json_string
     
-    
+
+# Handles server responses    
 def processServerResponse(json_response):
   response_dict = json.loads(json_response)
   response_type = response_dict["type"]
   global money
+  global book
   if response_type == "hello":
     money = response_dict["cash"]
   elif response_type == "open":
@@ -46,25 +48,33 @@ def processServerResponse(json_response):
     pass
   elif response_type == "error":
     print(response_dict["error"])
+
   elif response_type == "book":
-    #update our local copy of the book
+    # Update our local copy of the book
+    book[response_dict["symbol"]] = {"buy": response_dict["buy"], "sell": response_dict["sell"]}
     pass
+
   elif response_type == "trade":
     pass
   elif response_type == "ack":
-    #our order went through
+    # Our order went through
     pass
+
   elif response_type == "reject":
-    #remove the order from out local list
+    # Remove the order from out local list
     print (response_dict["order_id"], response_dict["error"])
+
   elif response_type == "fill":        
     pass
   elif response_type == "out":    
     pass
         
   return response_dict
+  
 
-
+def whatToBuy():
+  
+def whatToSell():
 
 def main():
   exchange = connect()
@@ -73,13 +83,16 @@ def main():
   hello_from_exchange = json.loads(exchange.readline())
   print(hello_from_exchange)
   print(json_string, file=exchange)
+ 
   while 1:
-    # read everything the server says
+    # Read everything the server says  
     try:
       message_from_exchange = json.loads(exchange.readline())
+      processServerResponse(message_from_exchange)
       print(message_from_exchange)
     except:
       pass
+
     for i in range(1, 100):
       json_string = '{"type": "add", "order_id": ' + str(i) + ', "symbol": "BOND", "dir": "BUY", "price": 999, "size": 1}'
       try:
@@ -93,7 +106,6 @@ def main():
 #	print("i am trying to sell")
       except:
         pass
-      time.sleep(0.2)
 
 if __name__ == "__main__":
   main()
