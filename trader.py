@@ -54,8 +54,9 @@ def processServerResponse(json_response):
     for symbol_pair in response_dict["symbols"]:
       sym = symbol_pair["symbol"]
       pos = symbol_pair["position"]      
-
+      
       my_stock[sym] = pos
+    
   elif response_type == "open":
     #update list of open orders
     pass
@@ -80,9 +81,9 @@ def processServerResponse(json_response):
     print (response_dict["order_id"], response_dict["error"])
 
   elif response_type == "fill":        
-
+    print response_dict
     hello()
-
+    
     #this means that our order has been filled
     #so we should re-evaluate the state by saying hello
     
