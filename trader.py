@@ -5,10 +5,7 @@ import sys
 import socket
 import json
 import time
-<<<<<<< HEAD
 
-=======
->>>>>>> 5492f2b1d7d23a2a0d3dc3a399b24f4cddc9bbb8
 #GLOBALS
 
 # The amount of money we have
@@ -150,11 +147,7 @@ def processServerResponse(json_response, exchange):
     print (response_dict["order_id"], response_dict["error"])
 
   elif response_type == "fill":        
-<<<<<<< HEAD
-    print (response_dict)
-=======
     print(response_dict)
->>>>>>> 5492f2b1d7d23a2a0d3dc3a399b24f4cddc9bbb8
     hello()
     
     #this means that our order has been filled
@@ -189,14 +182,14 @@ def main():
       pass
 
     for i in range(1, 100):
-      print(bestBuyPrice("BOND"))
+      print(bestBuyPrice("BONDS"))
       json_string = '{"type": "add", "order_id": ' + str(i) + ', "symbol": "BOND", "dir": "BUY", "price": 999, "size": 1}'
       try:
         print(json_string, file=exchange)
 #	print("i am trying to buy")
       except:
         pass
-      print(bestSellPrice("BOND"))
+      print(bestSellPrice("BONDS"))
       json_string = '{"type": "add", "order_id": ' + str(i+100) + ', "symbol": "BOND", "dir": "SELL", "price": 1001, "size": 1}'
       try:
         print(json_string, file=exchange)
@@ -204,12 +197,7 @@ def main():
       except:
         pass
       time.sleep(0.1)
-<<<<<<< HEAD
-=======
-     
 
- 
->>>>>>> 5492f2b1d7d23a2a0d3dc3a399b24f4cddc9bbb8
 
 if __name__ == "__main__":
   main()
