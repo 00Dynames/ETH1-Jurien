@@ -30,7 +30,6 @@ def add(order_id, symbol, direction, price, size):
   json_string = '{"type": "add", "order_id": "' + str(order_id) + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "price": "' + str(price) + '", "size": "'+ str(size) +'"}'
   return json_string
 
-
     
 def convert(order_id, symbol, direction, price, size):
   json_string = '{"type": "convert", "order_id": "' + str(order_id) + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "size": "'+size +'"}'
@@ -197,7 +196,6 @@ def main():
       except:
         pass
       time.sleep(0.1)
-
-
+     
 if __name__ == "__main__":
   main()
