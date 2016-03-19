@@ -273,7 +273,7 @@ def canBuy(symbol):
 def recommendedPriceToSell(symbol):
   fair_price = fairPrice(symbol)
   price_to_sell = bestSellPrice(symbol)
-  if original_price[symbol] > price_to_sell:
+  if original_prices.has_key(symbol) and original_prices[symbol] > price_to_sell:
     return -1
   if not book.has_key(symbol) or price_to_sell == 0:
     return -1
