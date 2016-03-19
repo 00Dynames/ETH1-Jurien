@@ -4,6 +4,7 @@ from __future__ import print_function
 import sys
 import socket
 import json
+import time
 
 #GLOBALS
 
@@ -81,7 +82,7 @@ def processServerResponse(json_response):
     print (response_dict["order_id"], response_dict["error"])
 
   elif response_type == "fill":        
-    print response_dict
+    print (response_dict)
     hello()
     
     #this means that our order has been filled
@@ -134,6 +135,7 @@ def main():
 #	print("i am trying to sell")
       except:
         pass
+      time.sleep(0.1)
 
 if __name__ == "__main__":
   main()
