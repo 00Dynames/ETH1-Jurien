@@ -285,17 +285,10 @@ def recommendedPriceToSell(symbol):
 def recommendedPriceToBuy(symbol):
   fair_price = fairPrice(symbol)
   price_to_buy = bestBuyPrice(symbol)
-<<<<<<< HEAD
-
-  for i in range(0, len(book[symbol]['buy'])):
-    if price_to_buy > book[symbol]['buy'][i][0] and book[symbol]['buy'][i][0] <= fair_price - 1:
-      price_to_buy = books[symbol]['buy'][i][0] + 1
-=======
   if not book.has_key(symbol) or price_to_buy == 0:
     return -1
   if not price_to_buy == fair_price:
     price_to_buy += 1
->>>>>>> 521b69c4d56db7c65baee7f2e25e1d2783f03999
   return price_to_buy   
     
 def main():
