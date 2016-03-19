@@ -73,27 +73,59 @@ def whatToBuy():
   global order_id
   # Max number of bonds we buy in 1 transaction is 5
   symbol = "BOND"
-  size = 1
+  size = 5
   price = bestSellPrice(symbol)
-  for j in range(50):
+  for j in range(10):
     if canBuy(symbol) and price > 0:
       buy_request = '{"type": "add", "order_id": ' + str(order_id) + ', "symbol": ' + symbol + ', "dir": "BUY", "price": ' + price + ', "size": ' + size + ' }'
       orders.insert(buy_request)
       order_id += 1
+  
+  size = 1
+  symbol = "VALBZ"
+  for j in range(10):
+    if canBuy(symbol) and price > 0:
+      buy_request = '{"type": "add", "order_id": ' + str(order_id) + ', "symbol": ' + symbol + ', "dir": "BUY", "price": ' + price + ', "size": ' + size + ' }'
+      orders.insert(buy_request)
+      order_id += 1
+      
+  symbol = "VALE"
+  for j in range(10):
+    if canBuy(symbol) and price > 0:
+      buy_request = '{"type": "add", "order_id": ' + str(order_id) + ', "symbol": ' + symbol + ', "dir": "BUY", "price": ' + price + ', "size": ' + size + ' }'
+      orders.insert(buy_request)
+      order_id += 1
+
 
 # Generates sell requests and adds it onto the orders list
 def whatToSell():
   global orders
   global order_id  
   symbol = "BOND"
-  size = 1
-  order_id = getOrderId()
-  for j in range(100):
+  size = 5
+  for j in range(20):
     if canSell(symbol) and price > 0:
       sell_request = '{"type": "add", "order_id": ' + str(order_id) + ', "symbol": ' + symbol + ', "dir": "BUY", "price": ' + price + ', "size": ' + size + ' }'
       orders.insert(sell_request)
       order_id += 1
 
+  symbol = "VALBZ"
+  size = 1
+  for j in range(20):
+    if canSell(symbol) and price > 0:
+      sell_request = '{"type": "add", "order_id": ' + str(order_id) + ', "symbol": ' + symbol + ', "dir": "BUY", "price": ' + price + ', "size": ' + size + ' }'
+      orders.insert(sell_request)
+      order_id += 1
+
+  symbol = "VALE"
+  size = 1
+  for j in range(20):
+    if canSell(symbol) and price > 0:
+      sell_request = '{"type": "add", "order_id": ' + str(order_id) + ', "symbol": ' + symbol + ', "dir": "BUY", "price": ' + price + ', "size": ' + size + ' }'
+      orders.insert(sell_request)
+      order_id += 1
+      
+      
 # Sends all the orders to the exchange
 def makeTrades(exchange):
   global orders
