@@ -72,11 +72,17 @@ def processServerResponse(json_response):
         
   return response_dict
 
-def shouldBuy():
+def fairPrice(symbol):
+  mid = (bestSellPrice(symbol) + bestBuyPrice(symbol)) / 2  
+  return mid
+
+def canBuy():
   global cash
-  if cash <= -50000:
+  if cash <= -40000:
     return False
   else:
+    return True    
+    
        
 
 def main():
@@ -93,10 +99,8 @@ def main():
       print(message_from_exchange)
     except:
       pass
-    
-    # choose when to buy
+     
 
-    # choose when to sell
  
 
 if __name__ == "__main__":
