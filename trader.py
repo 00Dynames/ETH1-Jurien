@@ -24,10 +24,11 @@ def connect():
     s.connect(("10.0.254.41", 25001))
     return s.makefile('w+', 1)
 
+# Converts to JSON string given the parameters below
 def add(order_id, symbol, direction, price, size):
   #direction is buying / selling
 
-  json_string = '{"type": "add", "order_id": "' + str(order_id) + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "price": "' + str(price) + '", "size": "'+ str(size) +'"}'
+  json_string = '{"type": "add", "order_id": ' + str(order_id) + ', "symbol": "' + symbol + '", "dir": "' + direction + '", "price": ' + str(price) + ', "size": '+ str(size) +'}'
   return json_string
 
 def convert(order_id, symbol, direction, price, size):
@@ -60,39 +61,43 @@ def fairPrice(symbol):
 
 # Whether we have enough money to risk buying stocks
 def canBuy():
-  global cash
-  if cash <= -40000:
+  global money
+  if money <= -40000:
     return False
   else:
     return True    
-    
+   
+def canSell():
+  return True
+
+ 
 # Generates buy requests and adds it onto the orders list
 def whatToBuy():
   global orders
   global order_id
   # Max number of bonds we buy in 1 transaction is 5
-  symbol = "BOND"
+  symbol = "VALBZ"
   size = 5
-  price = bestSellPrice(symbol)
+ # price = bestSellPrice(symbol)
+  price = 4222
   for j in range(10):
-    if canBuy(symbol) and price > 0:
-      buy_request = '{"type": "add", "order_id": ' + str(order_id) + ', "symbol": ' + symbol + ', "dir": "BUY", "price": ' + price + ', "size": ' + size + ' }'
-      orders.insert(buy_request)
+    if canBuy() and price > 0:
+      buy_request = add(order_id, symbol, "BUY", price, size)
+      orders.append(buy_request)
       order_id += 1
   
-  size = 1
   symbol = "VALBZ"
   for j in range(10):
-    if canBuy(symbol) and price > 0:
-      buy_request = '{"type": "add", "order_id": ' + str(order_id) + ', "symbol": ' + symbol + ', "dir": "BUY", "price": ' + price + ', "size": ' + size + ' }'
-      orders.insert(buy_request)
+    if canBuy() and price > 0:
+      buy_request = add(order_id, symbol, "BUY", price, size)
+      orders.append(buy_request)
       order_id += 1
       
   symbol = "VALE"
   for j in range(10):
-    if canBuy(symbol) and price > 0:
-      buy_request = '{"type": "add", "order_id": ' + str(order_id) + ', "symbol": ' + symbol + ', "dir": "BUY", "price": ' + price + ', "size": ' + size + ' }'
-      orders.insert(buy_request)
+    if canBuy() and price > 0: 
+      buy_request = add(order_id, symbol, "BUY", price, size)
+      orders.append(buy_request)
       order_id += 1
 
 
@@ -101,27 +106,27 @@ def whatToSell():
   global orders
   global order_id  
   symbol = "BOND"
-  size = 5
+  size = "5"
+  price = 1001
   for j in range(20):
-    if canSell(symbol) and price > 0:
-      sell_request = '{"type": "add", "order_id": ' + str(order_id) + ', "symbol": ' + symbol + ', "dir": "BUY", "price": ' + price + ', "size": ' + size + ' }'
-      orders.insert(sell_request)
+    if canSell() and price > 0:
+      sell_request = add(order_id, symbol, "SELL", price, size)
+      orders.append(sell_request)
       order_id += 1
 
   symbol = "VALBZ"
-  size = 1
+  price = 4247
   for j in range(20):
-    if canSell(symbol) and price > 0:
-      sell_request = '{"type": "add", "order_id": ' + str(order_id) + ', "symbol": ' + symbol + ', "dir": "BUY", "price": ' + price + ', "size": ' + size + ' }'
-      orders.insert(sell_request)
+    if canSell() and price > 0:      
+      sell_request = add(order_id, symbol, "SELL", price, size)
+      orders.append(sell_request)
       order_id += 1
 
   symbol = "VALE"
-  size = 1
   for j in range(20):
-    if canSell(symbol) and price > 0:
-      sell_request = '{"type": "add", "order_id": ' + str(order_id) + ', "symbol": ' + symbol + ', "dir": "BUY", "price": ' + price + ', "size": ' + size + ' }'
-      orders.insert(sell_request)
+    if canSell() and price > 0:      
+      sell_request = add(order_id, symbol, "SELL", price, size)
+      orders.append(sell_request)
       order_id += 1
       
       
@@ -138,6 +143,7 @@ def processServerResponse(json_response, exchange):
   global my_stock
   global money
   global book
+  print(response_dict)
   if response_type == "hello":
     money = response_dict["cash"]
 
@@ -161,9 +167,9 @@ def processServerResponse(json_response, exchange):
     # After each state is recorded, we make decisions on what to buy and what to sell
     # Once we have a list of 100 actions, we send the requests to the exchange and then 
     # process the results.
-    whatToBuy()
-    whatToSell()
-    makeTrades(exchange)
+    #whatToBuy()
+    #whatToSell()
+#    makeTrades(exchange)
     pass
 
   elif response_type == "trade":
@@ -237,27 +243,11 @@ def main():
     except:
       pass
 
-    for i in range(1, 100):
+    whatToBuy()
+    whatToSell()
+    makeTrades(exchange)
 
-      if book.has_key("BOND"):
-        print(bestBuyPrice("BOND"))        
-      
-      json_string = '{"type": "add", "order_id": ' + str(i) + ', "symbol": "BOND", "dir": "BUY", "price": 999, "size": 1}'
-      try:
-        print(json_string, file=exchange)
-#	print("i am trying to buy")
-      except:
-        pass
-
-      if book.has_key("BOND"):
-        print(bestSellPrice("BOND"))
-      json_string = '{"type": "add", "order_id": ' + str(i+100) + ', "symbol": "BOND", "dir": "SELL", "price": 1001, "size": 1}'
-      try:
-        print(json_string, file=exchange)
-#	print("i am trying to sell")
-      except:
-        pass
-      time.sleep(0.1)
+    time.sleep(0.1)
      
 if __name__ == "__main__":
   main()
