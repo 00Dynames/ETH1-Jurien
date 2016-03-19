@@ -9,8 +9,13 @@ import json
 
 money = 0
 bond_fair = 1000
+
 book = {}
 orders = []
+
+
+
+my_stock = {}
 
 def connect():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -32,15 +37,25 @@ def cancel(order_id):
   json_string = '{"type": "cancel", "order_id": "'+ str(order_id) + '"}'
   return json_string
     
+def hello():
+  json_string = '{"type": "hello", "team": "JURIEN"}'
+  print(json_string, file=exchange)
 
 # Handles server responses    
 def processServerResponse(json_response):
   response_dict = json.loads(json_response)
   response_type = response_dict["type"]
+  global my_stock
   global money
   global book
   if response_type == "hello":
     money = response_dict["cash"]
+
+    for symbol_pair in response_dict["symbols"]:
+      sym = symbol_pair["symbol"]
+      pos = symbol_pair["position"]      
+
+      my_stock[sym] = pos
   elif response_type == "open":
     #update list of open orders
     pass
@@ -65,6 +80,16 @@ def processServerResponse(json_response):
     print (response_dict["order_id"], response_dict["error"])
 
   elif response_type == "fill":        
+
+    hello()
+
+    #this means that our order has been filled
+    #so we should re-evaluate the state by saying hello
+    
+    json_string = '{"type": "hello", "team": "JURIEN"}'
+    print(json_string, file=exchange)          
+
+
     pass
   elif response_type == "out":    
     pass
@@ -73,9 +98,11 @@ def processServerResponse(json_response):
   
 
 def whatToBuy():
+  pass
   
 def whatToSell():
-
+  pass
+  
 def main():
   exchange = connect()
   json_string = '{"type": "hello", "team": "JURIEN"}'
