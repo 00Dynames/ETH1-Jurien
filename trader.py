@@ -4,6 +4,7 @@ from __future__ import print_function
 import sys
 import socket
 import json
+import time
 
 #GLOBALS
 
@@ -92,6 +93,7 @@ def main():
 #	print("i am trying to sell")
       except:
         pass
+        sleep(0.05)
 
 if __name__ == "__main__":
   main()
