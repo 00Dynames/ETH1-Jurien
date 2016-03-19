@@ -79,10 +79,10 @@ def whatToBuy():
   global orders
   global order_id
   # Max number of bonds we buy in 1 transaction is 5
-  symbol = "VALBZ"
+  symbol = "BOND"
   size = 5
  # price = bestSellPrice(symbol)
-  price = 4222
+  price = recommendedPriceToBuy(SYMBOL)
   for j in range(10):
     if canBuy() and price > 0:
       buy_request = add(order_id, symbol, "BUY", price, size)
@@ -90,6 +90,7 @@ def whatToBuy():
       order_id += 1
   
   symbol = "VALBZ"
+  price = recommendedPriceToBuy(SYMBOL)
   for j in range(10):
     if canBuy() and price > 0:
       buy_request = add(order_id, symbol, "BUY", price, size)
@@ -97,6 +98,7 @@ def whatToBuy():
       order_id += 1
       
   symbol = "VALE"
+  price = recommendedPriceToBuy(SYMBOL)
   for j in range(10):
     if canBuy() and price > 0: 
       buy_request = add(order_id, symbol, "BUY", price, size)
@@ -110,23 +112,24 @@ def whatToSell():
   global order_id  
   symbol = "BOND"
   size = "5"
-  price = 1001
-  for j in range(20):
+  price = recommendedPriceToSell(SYMBOL)
+  for j in range(10):
     if canSell() and price > 0:
       sell_request = add(order_id, symbol, "SELL", price, size)
       orders.append(sell_request)
       order_id += 1
 
   symbol = "VALBZ"
-  price = 4247
-  for j in range(20):
+  price = recommendedPriceToSell(SYMBOL)
+  for j in range(10):
     if canSell() and price > 0:      
       sell_request = add(order_id, symbol, "SELL", price, size)
       orders.append(sell_request)
       order_id += 1
 
   symbol = "VALE"
-  for j in range(20):
+  price = recommendedPriceToSell(SYMBOL)
+  for j in range(10):
     if canSell() and price > 0:      
       sell_request = add(order_id, symbol, "SELL", price, size)
       orders.append(sell_request)
