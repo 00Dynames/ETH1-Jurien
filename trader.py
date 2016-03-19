@@ -29,8 +29,7 @@ def add(order_id, symbol, direction, price, size):
   json_string = '{"type": "add", "order_id": "' + str(order_id) + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "price": "' + str(price) + '", "size": "'+ str(size) +'"}'
   return json_string
 
-def maxBond:
-  return book["BOND"]["BUYS"]    
+
     
 def convert(order_id, symbol, direction, price, size):
   json_string = '{"type": "convert", "order_id": "' + str(order_id) + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "size": "'+size +'"}'
@@ -77,7 +76,7 @@ def whatToBuy():
   size = 1
   price = bestSellPrice(symbol)
   for j in range(50):
-    if canBuy(symbol) and price > 0
+    if canBuy(symbol) and price > 0:
       buy_request = '{"type": "add", "order_id": ' + str(order_id) + ', "symbol": ' + symbol + ', "dir": "BUY", "price": ' + price + ', "size": ' + size + ' }'
       orders.insert(buy_request)
       order_id += 1
@@ -90,7 +89,7 @@ def whatToSell():
   size = 1
   order_id = getOrderId()
   for j in range(100):
-    if canSell(symbol) and price > 0
+    if canSell(symbol) and price > 0:
       sell_request = '{"type": "add", "order_id": ' + str(order_id) + ', "symbol": ' + symbol + ', "dir": "BUY", "price": ' + price + ', "size": ' + size + ' }'
       orders.insert(sell_request)
       order_id += 1
@@ -147,7 +146,7 @@ def processServerResponse(json_response, exchange):
     print (response_dict["order_id"], response_dict["error"])
 
   elif response_type == "fill":        
-    print response_dict
+    print(response_dict)
     hello()
     
     #this means that our order has been filled
@@ -182,12 +181,14 @@ def main():
       pass
 
     for i in range(1, 100):
+      print(bestBuyPrice("BOND"))
       json_string = '{"type": "add", "order_id": ' + str(i) + ', "symbol": "BOND", "dir": "BUY", "price": 999, "size": 1}'
       try:
         print(json_string, file=exchange)
 #	print("i am trying to buy")
       except:
         pass
+      print(bestSellPrice("BOND"))
       json_string = '{"type": "add", "order_id": ' + str(i+100) + ', "symbol": "BOND", "dir": "SELL", "price": 1001, "size": 1}'
       try:
         print(json_string, file=exchange)
