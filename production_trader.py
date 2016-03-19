@@ -16,7 +16,7 @@ book = {}
 # The buy/sell requests that are sent to the exchange
 orders = []
 # The stocks that we own
-my_stock = {}
+my_stock = {"BOND": 0, "VALBZ": 0, "VALE": 0, "GS": 0, "MS": 0, "WFC": 0, "XLF": 0}
 order_id = 1
 
 def connect():
@@ -24,13 +24,13 @@ def connect():
     s.connect(("production", 25000))
     return s.makefile('w+', 1)
 
+# Converts to JSON string given the parameters below
 def add(order_id, symbol, direction, price, size):
   #direction is buying / selling
 
-  json_string = '{"type": "add", "order_id": "' + str(order_id) + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "price": "' + str(price) + '", "size": "'+ str(size) +'"}'
+  json_string = '{"type": "add", "order_id": ' + str(order_id) + ', "symbol": "' + symbol + '", "dir": "' + direction + '", "price": ' + str(price) + ', "size": '+ str(size) +'}'
   return json_string
 
-    
 def convert(order_id, symbol, direction, price, size):
   json_string = '{"type": "convert", "order_id": "' + str(order_id) + '", "symbol": "' + symbol + '", "dir": "' + direction + '", "size": "'+size +'"}'
   return json_string
@@ -46,40 +46,69 @@ def hello():
 # The highest price someone is willing to offer for a share    
 def bestBuyPrice(symbol):
   global book
+  if not book.has_key(symbol):
+    return 0
   return book[symbol]["buy"][0][0]
 
 # The lowest someone is willing to sell out a share
 def bestSellPrice(symbol):
   global book
+  if not book.has_key(symbol):
+    return 0
   return book[symbol]["sell"][0][0]
 
 
 # Returns the fair price of the stock assuming the market is correct
 def fairPrice(symbol):
+  if symbol == "BOND":
+    return 1000
+  
   mid = (bestSellPrice(symbol) + bestBuyPrice(symbol)) / 2  
   return mid
 
-# Whether we have enough money to risk buying stocks
-def canBuy():
-  global cash
-  if cash <= -40000:
+def canSell(symbol):
+  if not my_stock.has_key(symbol):
     return False
-  else:
-    return True    
-    
+  if symbol == "VALBZ" and my_stock[symbol] > -10:
+    return True
+  elif symbol == "VALE" and my_stock[symbol] > -10:
+    return True
+  elif my_stock[symbol] > -100:
+    return True
+  return False
+
+ 
 # Generates buy requests and adds it onto the orders list
 def whatToBuy():
   global orders
   global order_id
   # Max number of bonds we buy in 1 transaction is 5
   symbol = "BOND"
-  size = 1
-  price = bestSellPrice(symbol)
-  for j in range(50):
+  size = 1 
+ # price = bestSellPrice(symbol)
+  price = recommendedPriceToBuy(symbol)
+  for j in range(10):
     if canBuy(symbol) and price > 0:
-      buy_request = '{"type": "add", "order_id": ' + str(order_id) + ', "symbol": ' + symbol + ', "dir": "BUY", "price": ' + price + ', "size": ' + size + ' }'
-      orders.insert(buy_request)
-      order_id += 1
+      buy_request = add(int(round(time.time() * 1000)), symbol, "BUY", price, size)
+      orders.append(buy_request)
+      time.sleep(0.001)
+  
+  symbol = "VALBZ"
+  size = "1"
+  price = recommendedPriceToBuy(symbol)
+  for j in range(5):
+    if canBuy(symbol) and price > 0:
+      buy_request = add(int(round(time.time() * 1000)), symbol, "BUY", price, size)
+      orders.append(buy_request)
+      time.sleep(0.001)
+  symbol = "VALE"
+  price = recommendedPriceToBuy(symbol)
+  for j in range(5):
+    if canBuy(symbol) and price > 0: 
+      buy_request = add(int(round(time.time() * 1000)), symbol, "BUY", price, size)
+      orders.append(buy_request)
+      time.sleep(0.001)
+
 
 # Generates sell requests and adds it onto the orders list
 def whatToSell():
@@ -87,18 +116,35 @@ def whatToSell():
   global order_id  
   symbol = "BOND"
   size = 1
-  order_id = getOrderId()
-  for j in range(100):
+  price = recommendedPriceToSell(symbol)
+  for j in range(10):
     if canSell(symbol) and price > 0:
-      sell_request = '{"type": "add", "order_id": ' + str(order_id) + ', "symbol": ' + symbol + ', "dir": "BUY", "price": ' + price + ', "size": ' + size + ' }'
-      orders.insert(sell_request)
-      order_id += 1
-
+      sell_request = add(int(round(time.time() * 1000)), symbol, "SELL", price, size)
+      orders.append(sell_request)
+      time.sleep(0.001)
+  symbol = "VALBZ"
+  size = "1"
+  price = recommendedPriceToSell(symbol)
+  for j in range(5):
+    if canSell(symbol) and price > 0:      
+      sell_request = add(int(round(time.time() * 1000)), symbol, "SELL", price, size)
+      orders.append(sell_request)
+      time.sleep(0.001)
+  symbol = "VALE"
+  price = recommendedPriceToSell(symbol)
+  for j in range(5):
+    if canSell(symbol) and price > 0:      
+      sell_request = add(int(round(time.time() * 1000)), symbol, "SELL", price, size)
+      orders.append(sell_request)
+      time.sleep(0.001)
+      
+      
 # Sends all the orders to the exchange
 def makeTrades(exchange):
   global orders
   for item in orders:
     print(item, file=exchange)
+  orders = []
 
 # Processes and handles the different server responses
 def processServerResponse(json_response, exchange):
@@ -107,6 +153,8 @@ def processServerResponse(json_response, exchange):
   global my_stock
   global money
   global book
+  global order_id
+  print(response_dict)
   if response_type == "hello":
     money = response_dict["cash"]
 
@@ -123,16 +171,17 @@ def processServerResponse(json_response, exchange):
     pass
   elif response_type == "error":
     print(response_dict["error"])
-
+    if response_dict["error"] == "DUPLICATE_ORDER_ID":
+      order_id += 10
   elif response_type == "book":
     # Update our local copy of the book
     book[response_dict["symbol"]] = {"buy": response_dict["buy"], "sell": response_dict["sell"]}
     # After each state is recorded, we make decisions on what to buy and what to sell
     # Once we have a list of 100 actions, we send the requests to the exchange and then 
     # process the results.
-    whatToBuy()
-    whatToSell()
-    makeTrades(exchange)
+    #whatToBuy()
+    #whatToSell()
+#    makeTrades(exchange)
     pass
 
   elif response_type == "trade":
@@ -147,6 +196,11 @@ def processServerResponse(json_response, exchange):
 
   elif response_type == "fill":        
     print(response_dict)
+    if response_dict["dir"] == "BUY":
+      my_stock[response_dict["symbol"]] += response_dict["size"] 
+    else:
+      my_stock[response_dict["symbol"]] -= response_dict["size"] 
+    
     hello()
     
     #this means that our order has been filled
@@ -163,6 +217,43 @@ def processServerResponse(json_response, exchange):
   return response_dict
 
 
+def canBuy(symbol):
+  global money
+  if money <= -40000:
+    return False
+  else:
+    if not my_stock.has_key(symbol):
+      return False
+    if symbol == "BOND" and my_stock[symbol] < 100: 
+      return True   
+    elif symbol == "VALBZ" and my_stock[symbol] < 10:
+      return True
+    elif symbol == "VALE" and my_stock[symbol] < 10:
+      return True
+
+  return False
+
+# gives the lowest selling price to sell quickly
+# returns "pennied" price to sell
+def recommendedPriceToSell(symbol):
+  fair_price = fairPrice(symbol)
+  price_to_sell = bestSellPrice(symbol)
+  if not book.has_key(symbol) or price_to_sell == 0:
+    return -1
+  if not price_to_sell == fair_price:
+    price_to_sell -= 1
+  return price_to_sell  
+    
+# returns "pennied" price to buy
+def recommendedPriceToBuy(symbol):
+  fair_price = fairPrice(symbol)
+  price_to_buy = bestBuyPrice(symbol)
+  if not book.has_key(symbol) or price_to_buy == 0:
+    return -1
+  if not price_to_buy == fair_price:
+    price_to_buy += 1
+  return price_to_buy   
+    
 def main():
   exchange = connect()
   json_string = '{"type": "hello", "team": "JURIEN"}'
@@ -174,32 +265,16 @@ def main():
   while 1:
     # Read everything the server says  
     try:
-      message_from_exchange = json.loads(exchange.readline())
+      message_from_exchange = exchange.readline()
       processServerResponse(message_from_exchange, exchange)
       print(message_from_exchange)
     except:
       pass
 
-    for i in range(1, 100):
-
-      if book.has_key("BOND"):
-        print(bestBuyPrice("BOND"))
-      json_string = '{"type": "add", "order_id": ' + str(i) + ', "symbol": "BOND", "dir": "BUY", "price": 999, "size": 1}'
-      try:
-        print(json_string, file=exchange)
-#	print("i am trying to buy")
-      except:
-        pass
-
-      if book.has_key("BOND"):
-        print(bestSellPrice("BOND"))
-      json_string = '{"type": "add", "order_id": ' + str(i+100) + ', "symbol": "BOND", "dir": "SELL", "price": 1001, "size": 1}'
-      try:
-        print(json_string, file=exchange)
-#	print("i am trying to sell")
-      except:
-        pass
-      time.sleep(0.1)
+    whatToBuy()
+    whatToSell()
+    makeTrades(exchange)
+    time.sleep(0.2)
      
 if __name__ == "__main__":
   main()
